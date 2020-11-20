@@ -1,0 +1,59 @@
+Package br.ufs.dcomp.compilers.project.nonneumann;
+
+Helpers
+	hex_identifier = '0x';
+	semicolon = ';';
+	multi_line_comment_open = '{-';
+	multi_line_comment_close = '-}';
+	any_char = [0x0 .. 0xfffff];
+	hex_alpha_numerical_digit = ['A'..'F'];
+	digit = ['0'..'9'];
+	char = (['a'..'z'] | ['A'..'Z']);
+	space = ' ';
+	rc = 13;
+	nl = 10;
+ 
+Tokens
+	comment_line = (semicolon([0..9] | 11 | 12 | [14..0xfffff])*);
+	comment_multi_line = (multi_line_comment_open(([0..44] | [46..0xfffff]) | ('-'+([0..44] | [46..124] | [126..0xfffff])))*'-'+'}');
+	
+	reserved_entry = 'entry';
+	reserved_function = 'function';
+	reserved_const = 'const';
+	reserved_type_int = 'int';
+	reserved_type_bool = 'bool';
+	reserved_type_real = 'real';
+	reserved_bool_true = 'true';
+	reserved_bool_false = 'false';
+	reserved_bool_and = 'and';
+	reserved_bool_or = 'or';
+	reserved_bool_equal = '=';
+	reserved_bool_gt = '>';
+	reserved_bool_lt = '<';
+	reserved_if = 'if';
+	reserved_then = 'then';
+	reserved_else = 'else';
+	
+	number_integer_dec = (digit+);
+	number_integer_hex = (hex_identifier(digit | hex_alpha_numerical_digit)+);
+ 	
+ 	number_float = (digit+('.')digit+);
+ 	number_float_cientific_notation = ((digit+)('E')('-')?(digit+));
+ 	
+	sign_plus = '+';
+	sign_minus = '-';
+	sign_mult = '*';
+	sign_div = '/';
+	sign_mod = '%';
+	sign_colon = ':';
+	sign_comma = ',';
+	sign_exclamation = '!';
+	sign_par_open = '(';
+	sign_par_close = ')';
+ 
+	blank = (space | rc | nl)+;
+	
+	id = ((char | '_')+(digit | char)*);
+Ignored Tokens
+	blank,
+	comment_line;
