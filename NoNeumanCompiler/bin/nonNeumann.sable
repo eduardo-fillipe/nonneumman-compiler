@@ -56,4 +56,5 @@ Tokens
 	id = ((char | '_')+(digit | char)*);
 Ignored Tokens
 	blank,
-	comment_line;
+	comment_line,
+	comment_multi_line;
