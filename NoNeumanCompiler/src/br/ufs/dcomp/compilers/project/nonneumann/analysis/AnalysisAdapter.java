@@ -141,24 +141,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTReservedBoolEqual(TReservedBoolEqual node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTReservedBoolGt(TReservedBoolGt node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTReservedBoolLt(TReservedBoolLt node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTReservedIf(TReservedIf node)
     {
         defaultCase(node);
@@ -172,6 +154,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTReservedElse(TReservedElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTReservedLambda(TReservedLambda node)
     {
         defaultCase(node);
     }
@@ -256,6 +244,24 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTSignParClose(TSignParClose node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTSignBoolEqual(TSignBoolEqual node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTSignBoolGt(TSignBoolGt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTSignBoolLt(TSignBoolLt node)
     {
         defaultCase(node);
     }

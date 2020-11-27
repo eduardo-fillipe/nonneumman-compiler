@@ -5,16 +5,16 @@ package br.ufs.dcomp.compilers.project.nonneumann.node;
 import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TReservedBoolGt extends Token
+public final class TReservedLambda extends Token
 {
-    public TReservedBoolGt()
+    public TReservedLambda()
     {
-        super.setText(">");
+        super.setText("lambda");
     }
 
-    public TReservedBoolGt(int line, int pos)
+    public TReservedLambda(int line, int pos)
     {
-        super.setText(">");
+        super.setText("lambda");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TReservedBoolGt extends Token
     @Override
     public Object clone()
     {
-      return new TReservedBoolGt(getLine(), getPos());
+      return new TReservedLambda(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTReservedBoolGt(this);
+        ((Analysis) sw).caseTReservedLambda(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TReservedBoolGt text.");
+        throw new RuntimeException("Cannot change TReservedLambda text.");
     }
 }

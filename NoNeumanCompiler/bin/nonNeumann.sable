@@ -17,6 +17,7 @@ Tokens
 	comment_line = (semicolon([0..9] | 11 | 12 | [14..0xfffff])*);
 	comment_multi_line = (multi_line_comment_open(([0..44] | [46..0xfffff]) | ('-'+([0..44] | [46..124] | [126..0xfffff])))*'-'+'}');
 	
+
 	reserved_entry = 'entry';
 	reserved_function = 'function';
 	reserved_const = 'const';
@@ -26,13 +27,11 @@ Tokens
 	reserved_bool_true = 'true';
 	reserved_bool_false = 'false';
 	reserved_bool_and = 'and';
-	reserved_bool_or = 'or';
-	reserved_bool_equal = '=';
-	reserved_bool_gt = '>';
-	reserved_bool_lt = '<';
+	reserved_bool_or = 'or';	
 	reserved_if = 'if';
 	reserved_then = 'then';
 	reserved_else = 'else';
+	reserved_lambda = 'lambda';
 	
 	number_integer_dec = (digit+);
 	number_integer_hex = (hex_identifier(digit | hex_alpha_numerical_digit)+);
@@ -50,6 +49,9 @@ Tokens
 	sign_exclamation = '!';
 	sign_par_open = '(';
 	sign_par_close = ')';
+	sign_bool_equal = '=';
+	sign_bool_gt = '>';
+	sign_bool_lt = '<';
  
 	blank = (space | rc | nl)+;
 	

@@ -23,12 +23,10 @@ public interface Analysis extends Switch
     void caseTReservedBoolFalse(TReservedBoolFalse node);
     void caseTReservedBoolAnd(TReservedBoolAnd node);
     void caseTReservedBoolOr(TReservedBoolOr node);
-    void caseTReservedBoolEqual(TReservedBoolEqual node);
-    void caseTReservedBoolGt(TReservedBoolGt node);
-    void caseTReservedBoolLt(TReservedBoolLt node);
     void caseTReservedIf(TReservedIf node);
     void caseTReservedThen(TReservedThen node);
     void caseTReservedElse(TReservedElse node);
+    void caseTReservedLambda(TReservedLambda node);
     void caseTNumberIntegerDec(TNumberIntegerDec node);
     void caseTNumberIntegerHex(TNumberIntegerHex node);
     void caseTNumberFloat(TNumberFloat node);
@@ -43,6 +41,9 @@ public interface Analysis extends Switch
     void caseTSignExclamation(TSignExclamation node);
     void caseTSignParOpen(TSignParOpen node);
     void caseTSignParClose(TSignParClose node);
+    void caseTSignBoolEqual(TSignBoolEqual node);
+    void caseTSignBoolGt(TSignBoolGt node);
+    void caseTSignBoolLt(TSignBoolLt node);
     void caseTBlank(TBlank node);
     void caseTId(TId node);
     void caseEOF(EOF node);

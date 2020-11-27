@@ -5,16 +5,16 @@ package br.ufs.dcomp.compilers.project.nonneumann.node;
 import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TReservedBoolLt extends Token
+public final class TSignBoolEqual extends Token
 {
-    public TReservedBoolLt()
+    public TSignBoolEqual()
     {
-        super.setText("<");
+        super.setText("=");
     }
 
-    public TReservedBoolLt(int line, int pos)
+    public TSignBoolEqual(int line, int pos)
     {
-        super.setText("<");
+        super.setText("=");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TReservedBoolLt extends Token
     @Override
     public Object clone()
     {
-      return new TReservedBoolLt(getLine(), getPos());
+      return new TSignBoolEqual(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTReservedBoolLt(this);
+        ((Analysis) sw).caseTSignBoolEqual(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TReservedBoolLt text.");
+        throw new RuntimeException("Cannot change TSignBoolEqual text.");
     }
 }
