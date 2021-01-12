@@ -69,211 +69,229 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTCommentLine(TCommentLine node)
+    public void caseStart(Start node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTCommentMultiLine(TCommentMultiLine node)
+    public void caseAProgram(AProgram node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedEntry(TReservedEntry node)
+    public void caseATkReservedEntryFunctionDec(ATkReservedEntryFunctionDec node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedFunction(TReservedFunction node)
+    public void caseTTkCommentLine(TTkCommentLine node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedConst(TReservedConst node)
+    public void caseTTkCommentMultiLine(TTkCommentMultiLine node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedTypeInt(TReservedTypeInt node)
+    public void caseTTkReservedEntry(TTkReservedEntry node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedTypeBool(TReservedTypeBool node)
+    public void caseTTkReservedFunction(TTkReservedFunction node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedTypeReal(TReservedTypeReal node)
+    public void caseTTkReservedConst(TTkReservedConst node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedBoolTrue(TReservedBoolTrue node)
+    public void caseTTkReservedTypeInt(TTkReservedTypeInt node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedBoolFalse(TReservedBoolFalse node)
+    public void caseTTkReservedTypeBool(TTkReservedTypeBool node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedBoolAnd(TReservedBoolAnd node)
+    public void caseTTkReservedTypeReal(TTkReservedTypeReal node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedBoolOr(TReservedBoolOr node)
+    public void caseTTkReservedBoolTrue(TTkReservedBoolTrue node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedIf(TReservedIf node)
+    public void caseTTkReservedBoolFalse(TTkReservedBoolFalse node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedThen(TReservedThen node)
+    public void caseTTkReservedBoolAnd(TTkReservedBoolAnd node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedElse(TReservedElse node)
+    public void caseTTkReservedBoolOr(TTkReservedBoolOr node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTReservedLambda(TReservedLambda node)
+    public void caseTTkReservedIf(TTkReservedIf node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTNumberIntegerDec(TNumberIntegerDec node)
+    public void caseTTkReservedThen(TTkReservedThen node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTNumberIntegerHex(TNumberIntegerHex node)
+    public void caseTTkReservedElse(TTkReservedElse node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTNumberFloat(TNumberFloat node)
+    public void caseTTkReservedLambda(TTkReservedLambda node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTNumberFloatCientificNotation(TNumberFloatCientificNotation node)
+    public void caseTTkNumberIntegerDec(TTkNumberIntegerDec node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignPlus(TSignPlus node)
+    public void caseTTkNumberIntegerHex(TTkNumberIntegerHex node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignMinus(TSignMinus node)
+    public void caseTTkNumberFloat(TTkNumberFloat node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignMult(TSignMult node)
+    public void caseTTkNumberFloatCientificNotation(TTkNumberFloatCientificNotation node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignDiv(TSignDiv node)
+    public void caseTTkSignPlus(TTkSignPlus node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignMod(TSignMod node)
+    public void caseTTkSignMinus(TTkSignMinus node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignColon(TSignColon node)
+    public void caseTTkSignMult(TTkSignMult node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignComma(TSignComma node)
+    public void caseTTkSignDiv(TTkSignDiv node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignExclamation(TSignExclamation node)
+    public void caseTTkSignMod(TTkSignMod node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignParOpen(TSignParOpen node)
+    public void caseTTkSignColon(TTkSignColon node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignParClose(TSignParClose node)
+    public void caseTTkSignComma(TTkSignComma node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignBoolEqual(TSignBoolEqual node)
+    public void caseTTkSignExclamation(TTkSignExclamation node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignBoolGt(TSignBoolGt node)
+    public void caseTTkSignParOpen(TTkSignParOpen node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTSignBoolLt(TSignBoolLt node)
+    public void caseTTkSignParClose(TTkSignParClose node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTBlank(TBlank node)
+    public void caseTTkSignBoolEqual(TTkSignBoolEqual node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTId(TId node)
+    public void caseTTkSignBoolGt(TTkSignBoolGt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTkSignBoolLt(TTkSignBoolLt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTkBlank(TTkBlank node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTkId(TTkId node)
     {
         defaultCase(node);
     }

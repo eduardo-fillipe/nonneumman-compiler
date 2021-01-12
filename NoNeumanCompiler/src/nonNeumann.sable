@@ -14,49 +14,55 @@ Helpers
 	nl = 10;
  
 Tokens
-	comment_line = (semicolon([0..9] | 11 | 12 | [14..0xfffff])*);
-	comment_multi_line = (multi_line_comment_open(([0..44] | [46..0xfffff]) | ('-'+([0..44] | [46..124] | [126..0xfffff])))*'-'+'}');
+	tk_comment_line = (semicolon([0..9] | 11 | 12 | [14..0xfffff])*);
+	tk_comment_multi_line = (multi_line_comment_open(([0..44] | [46..0xfffff]) | ('-'+([0..44] | [46..124] | [126..0xfffff])))*'-'+'}');
 	
 
-	reserved_entry = 'entry';
-	reserved_function = 'function';
-	reserved_const = 'const';
-	reserved_type_int = 'int';
-	reserved_type_bool = 'bool';
-	reserved_type_real = 'real';
-	reserved_bool_true = 'true';
-	reserved_bool_false = 'false';
-	reserved_bool_and = 'and';
-	reserved_bool_or = 'or';	
-	reserved_if = 'if';
-	reserved_then = 'then';
-	reserved_else = 'else';
-	reserved_lambda = 'lambda';
+	tk_reserved_entry = 'entry';
+	tk_reserved_function = 'function';
+	tk_reserved_const = 'const';
+	tk_reserved_type_int = 'int';
+	tk_reserved_type_bool = 'bool';
+	tk_reserved_type_real = 'real';
+	tk_reserved_bool_true = 'true';
+	tk_reserved_bool_false = 'false';
+	tk_reserved_bool_and = 'and';
+	tk_reserved_bool_or = 'or';	
+	tk_reserved_if = 'if';
+	tk_reserved_then = 'then';
+	tk_reserved_else = 'else';
+	tk_reserved_lambda = 'lambda';
 	
-	number_integer_dec = (digit+);
-	number_integer_hex = (hex_identifier(digit | hex_alpha_numerical_digit)+);
+	tk_number_integer_dec = (digit+);
+	tk_number_integer_hex = (hex_identifier(digit | hex_alpha_numerical_digit)+);
  	
- 	number_float = (digit+('.')digit+);
- 	number_float_cientific_notation = ((digit+)('E')('-')?(digit+));
+ 	tk_number_float = (digit+('.')digit+);
+ 	tk_number_float_cientific_notation = ((digit+)('E')('-')?(digit+));
  	
-	sign_plus = '+';
-	sign_minus = '-';
-	sign_mult = '*';
-	sign_div = '/';
-	sign_mod = '%';
-	sign_colon = ':';
-	sign_comma = ',';
-	sign_exclamation = '!';
-	sign_par_open = '(';
-	sign_par_close = ')';
-	sign_bool_equal = '=';
-	sign_bool_gt = '>';
-	sign_bool_lt = '<';
+	tk_sign_plus = '+';
+	tk_sign_minus = '-';
+	tk_sign_mult = '*';
+	tk_sign_div = '/';
+	tk_sign_mod = '%';
+	tk_sign_colon = ':';
+	tk_sign_comma = ',';
+	tk_sign_exclamation = '!';
+	tk_sign_par_open = '(';
+	tk_sign_par_close = ')';
+	tk_sign_bool_equal = '=';
+	tk_sign_bool_gt = '>';
+	tk_sign_bool_lt = '<';
  
-	blank = (space | rc | nl)+;
+	tk_blank = (space | rc | nl)+;
 	
-	id = ((char | '_')+(digit | char)*);
+	tk_id = ((char | '_')+(digit | char)*);
+	
 Ignored Tokens
-	blank,
-	comment_line,
-	comment_multi_line;
+	tk_blank,
+	tk_comment_line,
+	tk_comment_multi_line;
+	
+Productions
+	program = function_dec;
+	
+	function_dec = {tk_reserved_entry};

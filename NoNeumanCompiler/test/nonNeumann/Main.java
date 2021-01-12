@@ -18,6 +18,7 @@ public class Main
 					new Lexer(
 							new PushbackReader(  
 									new FileReader(arquivo), 1024)); 
+			
 			Token token;
 			while(!((token = lexer.next()) instanceof EOF)) {
 				System.out.print(token.getClass());
