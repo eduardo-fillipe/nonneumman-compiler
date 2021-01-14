@@ -111,6 +111,7 @@ Productions
 		
 	term = {literal} literal 
 		|{function_call} function_call
+		|{lambda}lambda
 		|{exp} tk_sign_par_open exp tk_sign_par_close;
 		
 	negation = tk_sign_minus term;
@@ -133,5 +134,18 @@ Productions
 	exp_list = {exp_list}exp exp_list_aux*;
 		
 	exp_list_aux = {exp_list_aux}tk_sign_comma exp;
-		
+	
+	bloco_exp = {bloco_exp}tk_sign_par_open dec_cons* exp tk_sign_par_close;
+	
+	dec_cons = {dec_cons}tk_sign_par_open tk_reserved_const type tk_id dec_cons_aux tk_sign_par_close;
+	
+	dec_cons_aux = {dec_cons_aux}tk_sign_par_open exp tk_sign_par_close;
+	
+	lambda = tk_reserved_lambda tk_sign_par_open id_list tk_sign_par_close tk_sign_colon lambda_aux_exp;
+	
+	lambda_aux_exp = tk_sign_par_open exp tk_sign_par_close exp_list?;
+	
+	id_list = tk_id id_list_aux*;
+	
+	id_list_aux = tk_sign_comma tk_id;
 	

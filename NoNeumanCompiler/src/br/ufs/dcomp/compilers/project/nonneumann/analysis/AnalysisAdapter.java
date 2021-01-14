@@ -273,6 +273,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseALambdaTerm(ALambdaTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAExpTerm(AExpTerm node)
     {
         defaultCase(node);
@@ -352,6 +358,48 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAExpListAuxExpListAux(AExpListAuxExpListAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABlocoExpBlocoExp(ABlocoExpBlocoExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADecConsDecCons(ADecConsDecCons node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADecConsAuxDecConsAux(ADecConsAuxDecConsAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALambda(ALambda node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALambdaAuxExp(ALambdaAuxExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdList(AIdList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdListAux(AIdListAux node)
     {
         defaultCase(node);
     }

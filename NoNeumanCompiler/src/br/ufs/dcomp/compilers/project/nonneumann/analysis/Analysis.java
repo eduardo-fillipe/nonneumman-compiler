@@ -45,6 +45,7 @@ public interface Analysis extends Switch
     void caseAModFactor(AModFactor node);
     void caseALiteralTerm(ALiteralTerm node);
     void caseAFunctionCallTerm(AFunctionCallTerm node);
+    void caseALambdaTerm(ALambdaTerm node);
     void caseAExpTerm(AExpTerm node);
     void caseANegation(ANegation node);
     void caseABooleanValueLiteral(ABooleanValueLiteral node);
@@ -59,6 +60,13 @@ public interface Analysis extends Switch
     void caseAIdFunctionCall(AIdFunctionCall node);
     void caseAExpListExpList(AExpListExpList node);
     void caseAExpListAuxExpListAux(AExpListAuxExpListAux node);
+    void caseABlocoExpBlocoExp(ABlocoExpBlocoExp node);
+    void caseADecConsDecCons(ADecConsDecCons node);
+    void caseADecConsAuxDecConsAux(ADecConsAuxDecConsAux node);
+    void caseALambda(ALambda node);
+    void caseALambdaAuxExp(ALambdaAuxExp node);
+    void caseAIdList(AIdList node);
+    void caseAIdListAux(AIdListAux node);
 
     void caseTTkCommentLine(TTkCommentLine node);
     void caseTTkCommentMultiLine(TTkCommentMultiLine node);
