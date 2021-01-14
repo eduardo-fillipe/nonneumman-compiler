@@ -1,14 +1,7 @@
-9 8 
-;Comentario
-19{-
-0x999A4 ;numero hexa
+(function bool isOdd(int number):(!isEven(number())))
 
+(function bool isEven(int number):(number() % 2 = 0))
 
-THIAGO
+(function bool isOdd(int number):(isEven(number())+ isEven(number())))
 
-{-Test
-
-
-
-e-}
-{-Teste2-}
+(function bool isEven(int print(int), int n):(print(n())))

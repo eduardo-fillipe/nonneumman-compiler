@@ -63,6 +63,75 @@ Ignored Tokens
 	tk_comment_multi_line;
 	
 Productions
-	program = function_dec;
+	program = function_dec+;
 	
-	function_dec = {tk_reserved_entry};
+	function_dec = tk_reserved_entry? tk_sign_par_open tk_reserved_function type tk_id parameters_function_aux tk_sign_colon exp_function_aux tk_sign_par_close;
+	
+	parameters_function_aux = tk_sign_par_open parameters* tk_sign_par_close;
+	
+	exp_function_aux = tk_sign_par_open exp tk_sign_par_close;
+	
+	type = {tk_reserved_type_int}tk_reserved_type_int
+		|{tk_reserved_type_real}tk_reserved_type_real
+		|{tk_reserved_type_bool}tk_reserved_type_bool;
+		
+	parameters = parameter parameters_aux*;
+	
+	parameters_aux = tk_sign_comma parameter;
+	
+	parameter =  {dec}type tk_id
+		|{signature}signature;
+		
+	signature = type tk_id tk_sign_par_open parameter_signature tk_sign_par_close;
+	
+	parameters_signature = parameter_signature parameters_signature_aux*;
+	
+	parameters_signature_aux = tk_sign_comma parameters_signature;
+	
+	parameter_signature = {type}type
+		|{signature}signature;
+		
+	exp = {gt} exp tk_sign_bool_gt op
+		|{lt}exp tk_sign_bool_lt op
+		|{equal}exp tk_sign_bool_equal op
+		|{neg_bool}tk_sign_exclamation op
+		|{or}exp tk_reserved_bool_or op
+		|{and}exp tk_reserved_bool_and op
+		|{op}op;
+	
+	op = {factor}factor
+		|{plus}op tk_sign_plus factor
+  		|{minus}op tk_sign_minus factor;
+			
+	factor = {term} term
+		|{mult} factor tk_sign_mult term
+		|{div} factor tk_sign_div term
+		|{neg} negation
+		|{mod} factor tk_sign_mod term;
+		
+	term = {literal} literal 
+		|{function_call} function_call
+		|{exp} tk_sign_par_open exp tk_sign_par_close;
+		
+	negation = tk_sign_minus term;
+	
+	literal = {boolean_value}boolean_value
+		|{numeral_float}numeral_float
+		|{numeral_int}numeral_int;
+		
+	boolean_value = {tk_reserved_bool_true}tk_reserved_bool_true
+		|{tk_reserved_bool_false}tk_reserved_bool_false;
+	
+	numeral_float = {tk_number_float}tk_number_float
+		|{tk_number_float_cientific_notation}tk_number_float_cientific_notation;
+		
+	numeral_int = {tk_number_integer_dec}tk_number_integer_dec
+		|{tk_number_integer_hex}tk_number_integer_hex;
+	
+	function_call = {id}tk_id tk_sign_par_open exp_list? tk_sign_par_close;
+	
+	exp_list = {exp_list}exp exp_list_aux*;
+		
+	exp_list_aux = {exp_list_aux}tk_sign_comma exp;
+		
+	

@@ -81,7 +81,277 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseATkReservedEntryFunctionDec(ATkReservedEntryFunctionDec node)
+    public void caseAFunctionDec(AFunctionDec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParametersFunctionAux(AParametersFunctionAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpFunctionAux(AExpFunctionAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkReservedTypeIntType(ATkReservedTypeIntType node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkReservedTypeRealType(ATkReservedTypeRealType node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkReservedTypeBoolType(ATkReservedTypeBoolType node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParameters(AParameters node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParametersAux(AParametersAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADecParameter(ADecParameter node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASignatureParameter(ASignatureParameter node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASignature(ASignature node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParametersSignature(AParametersSignature node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParametersSignatureAux(AParametersSignatureAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATypeParameterSignature(ATypeParameterSignature node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASignatureParameterSignature(ASignatureParameterSignature node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAGtExp(AGtExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALtExp(ALtExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEqualExp(AEqualExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANegBoolExp(ANegBoolExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOrExp(AOrExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAndExp(AAndExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOpExp(AOpExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAFactorOp(AFactorOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAPlusOp(APlusOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMinusOp(AMinusOp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATermFactor(ATermFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMultFactor(AMultFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADivFactor(ADivFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANegFactor(ANegFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAModFactor(AModFactor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALiteralTerm(ALiteralTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAFunctionCallTerm(AFunctionCallTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpTerm(AExpTerm node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANegation(ANegation node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABooleanValueLiteral(ABooleanValueLiteral node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANumeralFloatLiteral(ANumeralFloatLiteral node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANumeralIntLiteral(ANumeralIntLiteral node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkReservedBoolTrueBooleanValue(ATkReservedBoolTrueBooleanValue node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkReservedBoolFalseBooleanValue(ATkReservedBoolFalseBooleanValue node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkNumberFloatNumeralFloat(ATkNumberFloatNumeralFloat node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkNumberFloatCientificNotationNumeralFloat(ATkNumberFloatCientificNotationNumeralFloat node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkNumberIntegerDecNumeralInt(ATkNumberIntegerDecNumeralInt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATkNumberIntegerHexNumeralInt(ATkNumberIntegerHexNumeralInt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIdFunctionCall(AIdFunctionCall node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpListExpList(AExpListExpList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpListAuxExpListAux(AExpListAuxExpListAux node)
     {
         defaultCase(node);
     }

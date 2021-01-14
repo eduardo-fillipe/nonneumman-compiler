@@ -2,12 +2,13 @@
 
 package br.ufs.dcomp.compilers.project.nonneumann.node;
 
+import java.util.*;
 import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 
 @SuppressWarnings("nls")
 public final class AProgram extends PProgram
 {
-    private PFunctionDec _functionDec_;
+    private final LinkedList<PFunctionDec> _functionDec_ = new LinkedList<PFunctionDec>();
 
     public AProgram()
     {
@@ -15,7 +16,7 @@ public final class AProgram extends PProgram
     }
 
     public AProgram(
-        @SuppressWarnings("hiding") PFunctionDec _functionDec_)
+        @SuppressWarnings("hiding") List<?> _functionDec_)
     {
         // Constructor
         setFunctionDec(_functionDec_);
@@ -26,7 +27,7 @@ public final class AProgram extends PProgram
     public Object clone()
     {
         return new AProgram(
-            cloneNode(this._functionDec_));
+            cloneList(this._functionDec_));
     }
 
     @Override
@@ -35,29 +36,30 @@ public final class AProgram extends PProgram
         ((Analysis) sw).caseAProgram(this);
     }
 
-    public PFunctionDec getFunctionDec()
+    public LinkedList<PFunctionDec> getFunctionDec()
     {
         return this._functionDec_;
     }
 
-    public void setFunctionDec(PFunctionDec node)
+    public void setFunctionDec(List<?> list)
     {
-        if(this._functionDec_ != null)
+        for(PFunctionDec e : this._functionDec_)
         {
-            this._functionDec_.parent(null);
+            e.parent(null);
         }
+        this._functionDec_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PFunctionDec e = (PFunctionDec) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._functionDec_.add(e);
         }
-
-        this._functionDec_ = node;
     }
 
     @Override
@@ -71,9 +73,8 @@ public final class AProgram extends PProgram
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._functionDec_ == child)
+        if(this._functionDec_.remove(child))
         {
-            this._functionDec_ = null;
             return;
         }
 
@@ -84,10 +85,22 @@ public final class AProgram extends PProgram
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._functionDec_ == oldChild)
+        for(ListIterator<PFunctionDec> i = this._functionDec_.listIterator(); i.hasNext();)
         {
-            setFunctionDec((PFunctionDec) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PFunctionDec) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         throw new RuntimeException("Not a child.");
