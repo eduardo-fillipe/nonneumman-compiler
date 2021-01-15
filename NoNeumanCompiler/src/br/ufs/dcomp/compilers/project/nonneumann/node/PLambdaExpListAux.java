@@ -2,7 +2,7 @@
 
 package br.ufs.dcomp.compilers.project.nonneumann.node;
 
-public abstract class PBlocoExp extends Node
+public abstract class PLambdaExpListAux extends Node
 {
     // Empty body
 }

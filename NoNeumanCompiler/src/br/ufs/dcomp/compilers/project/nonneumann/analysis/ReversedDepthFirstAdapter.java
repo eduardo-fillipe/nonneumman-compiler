@@ -642,6 +642,48 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAAndExp(node);
     }
 
+    public void inAIfStmtExp(AIfStmtExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfStmtExp(AIfStmtExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfStmtExp(AIfStmtExp node)
+    {
+        inAIfStmtExp(node);
+        if(node.getIfStmt() != null)
+        {
+            node.getIfStmt().apply(this);
+        }
+        outAIfStmtExp(node);
+    }
+
+    public void inALambdaExp(ALambdaExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALambdaExp(ALambdaExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALambdaExp(ALambdaExp node)
+    {
+        inALambdaExp(node);
+        if(node.getLambda() != null)
+        {
+            node.getLambda().apply(this);
+        }
+        outALambdaExp(node);
+    }
+
     public void inAOpExp(AOpExp node)
     {
         defaultIn(node);
@@ -913,27 +955,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAFunctionCallTerm(node);
     }
 
-    public void inALambdaTerm(ALambdaTerm node)
-    {
-        defaultIn(node);
-    }
-
-    public void outALambdaTerm(ALambdaTerm node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseALambdaTerm(ALambdaTerm node)
-    {
-        inALambdaTerm(node);
-        if(node.getLambda() != null)
-        {
-            node.getLambda().apply(this);
-        }
-        outALambdaTerm(node);
-    }
-
     public void inAExpTerm(AExpTerm node)
     {
         defaultIn(node);
@@ -955,6 +976,14 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
+        }
+        {
+            List<PDecCons> copy = new ArrayList<PDecCons>(node.getDecCons());
+            Collections.reverse(copy);
+            for(PDecCons e : copy)
+            {
+                e.apply(this);
+            }
         }
         if(node.getTkSignParOpen() != null)
         {
@@ -1264,43 +1293,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAExpListAuxExpListAux(node);
     }
 
-    public void inABlocoExpBlocoExp(ABlocoExpBlocoExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABlocoExpBlocoExp(ABlocoExpBlocoExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABlocoExpBlocoExp(ABlocoExpBlocoExp node)
-    {
-        inABlocoExpBlocoExp(node);
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        {
-            List<PDecCons> copy = new ArrayList<PDecCons>(node.getDecCons());
-            Collections.reverse(copy);
-            for(PDecCons e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        outABlocoExpBlocoExp(node);
-    }
-
     public void inADecConsDecCons(ADecConsDecCons node)
     {
         defaultIn(node);
@@ -1319,9 +1311,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getTkSignParClose().apply(this);
         }
-        if(node.getDecConsAux() != null)
+        if(node.getExp() != null)
         {
-            node.getDecConsAux().apply(this);
+            node.getExp().apply(this);
         }
         if(node.getTkId() != null)
         {
@@ -1342,35 +1334,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outADecConsDecCons(node);
     }
 
-    public void inADecConsAuxDecConsAux(ADecConsAuxDecConsAux node)
-    {
-        defaultIn(node);
-    }
-
-    public void outADecConsAuxDecConsAux(ADecConsAuxDecConsAux node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseADecConsAuxDecConsAux(ADecConsAuxDecConsAux node)
-    {
-        inADecConsAuxDecConsAux(node);
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        outADecConsAuxDecConsAux(node);
-    }
-
     public void inALambda(ALambda node)
     {
         defaultIn(node);
@@ -1385,9 +1348,21 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseALambda(ALambda node)
     {
         inALambda(node);
-        if(node.getLambdaAuxExp() != null)
+        if(node.getTkSignBraceClose() != null)
         {
-            node.getLambdaAuxExp().apply(this);
+            node.getTkSignBraceClose().apply(this);
+        }
+        if(node.getLambdaExpList() != null)
+        {
+            node.getLambdaExpList().apply(this);
+        }
+        if(node.getTkSignBraceOpen() != null)
+        {
+            node.getTkSignBraceOpen().apply(this);
+        }
+        if(node.getTerm() != null)
+        {
+            node.getTerm().apply(this);
         }
         if(node.getTkSignColon() != null)
         {
@@ -1412,37 +1387,58 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outALambda(node);
     }
 
-    public void inALambdaAuxExp(ALambdaAuxExp node)
+    public void inALambdaExpList(ALambdaExpList node)
     {
         defaultIn(node);
     }
 
-    public void outALambdaAuxExp(ALambdaAuxExp node)
+    public void outALambdaExpList(ALambdaExpList node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseALambdaAuxExp(ALambdaAuxExp node)
+    public void caseALambdaExpList(ALambdaExpList node)
     {
-        inALambdaAuxExp(node);
-        if(node.getExpList() != null)
+        inALambdaExpList(node);
         {
-            node.getExpList().apply(this);
-        }
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
+            List<PLambdaExpListAux> copy = new ArrayList<PLambdaExpListAux>(node.getLambdaExpListAux());
+            Collections.reverse(copy);
+            for(PLambdaExpListAux e : copy)
+            {
+                e.apply(this);
+            }
         }
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
         }
-        if(node.getTkSignParOpen() != null)
+        outALambdaExpList(node);
+    }
+
+    public void inALambdaExpListAux(ALambdaExpListAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALambdaExpListAux(ALambdaExpListAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALambdaExpListAux(ALambdaExpListAux node)
+    {
+        inALambdaExpListAux(node);
+        if(node.getExp() != null)
         {
-            node.getTkSignParOpen().apply(this);
+            node.getExp().apply(this);
         }
-        outALambdaAuxExp(node);
+        if(node.getTkSignComma() != null)
+        {
+            node.getTkSignComma().apply(this);
+        }
+        outALambdaExpListAux(node);
     }
 
     public void inAIdList(AIdList node)
@@ -1497,5 +1493,88 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getTkSignComma().apply(this);
         }
         outAIdListAux(node);
+    }
+
+    public void inAIfStmt(AIfStmt node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfStmt(AIfStmt node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfStmt(AIfStmt node)
+    {
+        inAIfStmt(node);
+        if(node.getIfStmtElseAux() != null)
+        {
+            node.getIfStmtElseAux().apply(this);
+        }
+        if(node.getTerm() != null)
+        {
+            node.getTerm().apply(this);
+        }
+        if(node.getTkReservedThen() != null)
+        {
+            node.getTkReservedThen().apply(this);
+        }
+        if(node.getIfStmtExpAux() != null)
+        {
+            node.getIfStmtExpAux().apply(this);
+        }
+        outAIfStmt(node);
+    }
+
+    public void inAIfStmtExpAux(AIfStmtExpAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfStmtExpAux(AIfStmtExpAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfStmtExpAux(AIfStmtExpAux node)
+    {
+        inAIfStmtExpAux(node);
+        if(node.getTerm() != null)
+        {
+            node.getTerm().apply(this);
+        }
+        if(node.getTkReservedIf() != null)
+        {
+            node.getTkReservedIf().apply(this);
+        }
+        outAIfStmtExpAux(node);
+    }
+
+    public void inAIfStmtElseAux(AIfStmtElseAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfStmtElseAux(AIfStmtElseAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfStmtElseAux(AIfStmtElseAux node)
+    {
+        inAIfStmtElseAux(node);
+        if(node.getTerm() != null)
+        {
+            node.getTerm().apply(this);
+        }
+        if(node.getTkReservedElse() != null)
+        {
+            node.getTkReservedElse().apply(this);
+        }
+        outAIfStmtElseAux(node);
     }
 }

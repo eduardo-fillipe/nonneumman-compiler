@@ -12,6 +12,7 @@ Helpers
 	space = ' ';
 	rc = 13;
 	nl = 10;
+	tab = 9;
  
 Tokens
 	tk_comment_line = (semicolon([0..9] | 11 | 12 | [14..0xfffff])*);
@@ -49,11 +50,13 @@ Tokens
 	tk_sign_exclamation = '!';
 	tk_sign_par_open = '(';
 	tk_sign_par_close = ')';
+	tk_sign_brace_open = '[';
+	tk_sign_brace_close = ']';
 	tk_sign_bool_equal = '=';
 	tk_sign_bool_gt = '>';
 	tk_sign_bool_lt = '<';
  
-	tk_blank = (space | rc | nl)+;
+	tk_blank = (space | rc | nl | tab)+;
 	
 	tk_id = ((char | '_')+(digit | char)*);
 	
@@ -94,9 +97,11 @@ Productions
 	exp = {gt} exp tk_sign_bool_gt op
 		|{lt}exp tk_sign_bool_lt op
 		|{equal}exp tk_sign_bool_equal op
-		|{neg_bool}tk_sign_exclamation op
+		|{neg_bool} tk_sign_exclamation op
 		|{or}exp tk_reserved_bool_or op
 		|{and}exp tk_reserved_bool_and op
+		|{if_stmt} if_stmt
+		|{lambda} lambda
 		|{op}op;
 	
 	op = {factor}factor
@@ -111,8 +116,7 @@ Productions
 		
 	term = {literal} literal 
 		|{function_call} function_call
-		|{lambda}lambda
-		|{exp} tk_sign_par_open exp tk_sign_par_close;
+		|{exp} tk_sign_par_open dec_cons* exp tk_sign_par_close;
 		
 	negation = tk_sign_minus term;
 	
@@ -135,17 +139,21 @@ Productions
 		
 	exp_list_aux = {exp_list_aux}tk_sign_comma exp;
 	
-	bloco_exp = {bloco_exp}tk_sign_par_open dec_cons* exp tk_sign_par_close;
+	dec_cons = {dec_cons}tk_sign_par_open tk_reserved_const type tk_id exp tk_sign_par_close;
+		
+	lambda = tk_reserved_lambda tk_sign_par_open id_list? tk_sign_par_close tk_sign_colon term tk_sign_brace_open lambda_exp_list? tk_sign_brace_close;
 	
-	dec_cons = {dec_cons}tk_sign_par_open tk_reserved_const type tk_id dec_cons_aux tk_sign_par_close;
+	lambda_exp_list = exp lambda_exp_list_aux*;
 	
-	dec_cons_aux = {dec_cons_aux}tk_sign_par_open exp tk_sign_par_close;
-	
-	lambda = tk_reserved_lambda tk_sign_par_open id_list tk_sign_par_close tk_sign_colon lambda_aux_exp;
-	
-	lambda_aux_exp = tk_sign_par_open exp tk_sign_par_close exp_list?;
-	
+	lambda_exp_list_aux = tk_sign_comma exp;
+		
 	id_list = tk_id id_list_aux*;
 	
 	id_list_aux = tk_sign_comma tk_id;
+	
+	if_stmt = if_stmt_exp_aux tk_reserved_then term if_stmt_else_aux;
+	
+	if_stmt_exp_aux = tk_reserved_if term;
+	
+	if_stmt_else_aux = tk_reserved_else term;
 	

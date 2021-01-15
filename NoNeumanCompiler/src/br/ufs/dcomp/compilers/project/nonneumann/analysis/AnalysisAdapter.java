@@ -207,6 +207,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAIfStmtExp(AIfStmtExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALambdaExp(ALambdaExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAOpExp(AOpExp node)
     {
         defaultCase(node);
@@ -268,12 +280,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAFunctionCallTerm(AFunctionCallTerm node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseALambdaTerm(ALambdaTerm node)
     {
         defaultCase(node);
     }
@@ -363,19 +369,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseABlocoExpBlocoExp(ABlocoExpBlocoExp node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseADecConsDecCons(ADecConsDecCons node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseADecConsAuxDecConsAux(ADecConsAuxDecConsAux node)
     {
         defaultCase(node);
     }
@@ -387,7 +381,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseALambdaAuxExp(ALambdaAuxExp node)
+    public void caseALambdaExpList(ALambdaExpList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALambdaExpListAux(ALambdaExpListAux node)
     {
         defaultCase(node);
     }
@@ -400,6 +400,24 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAIdListAux(AIdListAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfStmt(AIfStmt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfStmtExpAux(AIfStmtExpAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfStmtElseAux(AIfStmtElseAux node)
     {
         defaultCase(node);
     }
@@ -580,6 +598,18 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTTkSignParClose(TTkSignParClose node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTkSignBraceOpen(TTkSignBraceOpen node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTkSignBraceClose(TTkSignBraceClose node)
     {
         defaultCase(node);
     }

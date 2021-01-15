@@ -5,3 +5,13 @@
 (function bool isOdd(int number):(isEven(number())+ isEven(number())))
 
 (function bool isEven(int print(int), int n):(print(n())))
+
+(
+	function bool isEven(int number):(
+		(
+(const int pi (lambda (x,y) : (x()*y()) [2,7]))
+			
+			5
+		)
+	)
+)

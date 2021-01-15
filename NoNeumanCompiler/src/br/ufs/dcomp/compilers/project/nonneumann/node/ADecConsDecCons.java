@@ -11,7 +11,7 @@ public final class ADecConsDecCons extends PDecCons
     private TTkReservedConst _tkReservedConst_;
     private PType _type_;
     private TTkId _tkId_;
-    private PDecConsAux _decConsAux_;
+    private PExp _exp_;
     private TTkSignParClose _tkSignParClose_;
 
     public ADecConsDecCons()
@@ -24,7 +24,7 @@ public final class ADecConsDecCons extends PDecCons
         @SuppressWarnings("hiding") TTkReservedConst _tkReservedConst_,
         @SuppressWarnings("hiding") PType _type_,
         @SuppressWarnings("hiding") TTkId _tkId_,
-        @SuppressWarnings("hiding") PDecConsAux _decConsAux_,
+        @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TTkSignParClose _tkSignParClose_)
     {
         // Constructor
@@ -36,7 +36,7 @@ public final class ADecConsDecCons extends PDecCons
 
         setTkId(_tkId_);
 
-        setDecConsAux(_decConsAux_);
+        setExp(_exp_);
 
         setTkSignParClose(_tkSignParClose_);
 
@@ -50,7 +50,7 @@ public final class ADecConsDecCons extends PDecCons
             cloneNode(this._tkReservedConst_),
             cloneNode(this._type_),
             cloneNode(this._tkId_),
-            cloneNode(this._decConsAux_),
+            cloneNode(this._exp_),
             cloneNode(this._tkSignParClose_));
     }
 
@@ -160,16 +160,16 @@ public final class ADecConsDecCons extends PDecCons
         this._tkId_ = node;
     }
 
-    public PDecConsAux getDecConsAux()
+    public PExp getExp()
     {
-        return this._decConsAux_;
+        return this._exp_;
     }
 
-    public void setDecConsAux(PDecConsAux node)
+    public void setExp(PExp node)
     {
-        if(this._decConsAux_ != null)
+        if(this._exp_ != null)
         {
-            this._decConsAux_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -182,7 +182,7 @@ public final class ADecConsDecCons extends PDecCons
             node.parent(this);
         }
 
-        this._decConsAux_ = node;
+        this._exp_ = node;
     }
 
     public TTkSignParClose getTkSignParClose()
@@ -218,7 +218,7 @@ public final class ADecConsDecCons extends PDecCons
             + toString(this._tkReservedConst_)
             + toString(this._type_)
             + toString(this._tkId_)
-            + toString(this._decConsAux_)
+            + toString(this._exp_)
             + toString(this._tkSignParClose_);
     }
 
@@ -250,9 +250,9 @@ public final class ADecConsDecCons extends PDecCons
             return;
         }
 
-        if(this._decConsAux_ == child)
+        if(this._exp_ == child)
         {
-            this._decConsAux_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -293,9 +293,9 @@ public final class ADecConsDecCons extends PDecCons
             return;
         }
 
-        if(this._decConsAux_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setDecConsAux((PDecConsAux) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

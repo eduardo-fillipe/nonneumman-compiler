@@ -2,7 +2,7 @@
 
 package br.ufs.dcomp.compilers.project.nonneumann.node;
 
-public abstract class PLambdaAuxExp extends Node
+public abstract class PIfStmt extends Node
 {
     // Empty body
 }

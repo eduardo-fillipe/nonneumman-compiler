@@ -5,46 +5,46 @@ package br.ufs.dcomp.compilers.project.nonneumann.node;
 import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABlocoExpTerm extends PTerm
+public final class AIfStmtExp extends PExp
 {
-    private PBlocoExp _blocoExp_;
+    private PIfStmt _ifStmt_;
 
-    public ABlocoExpTerm()
+    public AIfStmtExp()
     {
         // Constructor
     }
 
-    public ABlocoExpTerm(
-        @SuppressWarnings("hiding") PBlocoExp _blocoExp_)
+    public AIfStmtExp(
+        @SuppressWarnings("hiding") PIfStmt _ifStmt_)
     {
         // Constructor
-        setBlocoExp(_blocoExp_);
+        setIfStmt(_ifStmt_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ABlocoExpTerm(
-            cloneNode(this._blocoExp_));
+        return new AIfStmtExp(
+            cloneNode(this._ifStmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseABlocoExpTerm(this);
+        ((Analysis) sw).caseAIfStmtExp(this);
     }
 
-    public PBlocoExp getBlocoExp()
+    public PIfStmt getIfStmt()
     {
-        return this._blocoExp_;
+        return this._ifStmt_;
     }
 
-    public void setBlocoExp(PBlocoExp node)
+    public void setIfStmt(PIfStmt node)
     {
-        if(this._blocoExp_ != null)
+        if(this._ifStmt_ != null)
         {
-            this._blocoExp_.parent(null);
+            this._ifStmt_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ABlocoExpTerm extends PTerm
             node.parent(this);
         }
 
-        this._blocoExp_ = node;
+        this._ifStmt_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._blocoExp_);
+            + toString(this._ifStmt_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._blocoExp_ == child)
+        if(this._ifStmt_ == child)
         {
-            this._blocoExp_ = null;
+            this._ifStmt_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ABlocoExpTerm extends PTerm
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._blocoExp_ == oldChild)
+        if(this._ifStmt_ == oldChild)
         {
-            setBlocoExp((PBlocoExp) newChild);
+            setIfStmt((PIfStmt) newChild);
             return;
         }
 

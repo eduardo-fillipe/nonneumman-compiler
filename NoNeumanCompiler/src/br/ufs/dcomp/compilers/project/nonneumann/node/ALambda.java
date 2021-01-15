@@ -12,7 +12,10 @@ public final class ALambda extends PLambda
     private PIdList _idList_;
     private TTkSignParClose _tkSignParClose_;
     private TTkSignColon _tkSignColon_;
-    private PLambdaAuxExp _lambdaAuxExp_;
+    private PTerm _term_;
+    private TTkSignBraceOpen _tkSignBraceOpen_;
+    private PLambdaExpList _lambdaExpList_;
+    private TTkSignBraceClose _tkSignBraceClose_;
 
     public ALambda()
     {
@@ -25,7 +28,10 @@ public final class ALambda extends PLambda
         @SuppressWarnings("hiding") PIdList _idList_,
         @SuppressWarnings("hiding") TTkSignParClose _tkSignParClose_,
         @SuppressWarnings("hiding") TTkSignColon _tkSignColon_,
-        @SuppressWarnings("hiding") PLambdaAuxExp _lambdaAuxExp_)
+        @SuppressWarnings("hiding") PTerm _term_,
+        @SuppressWarnings("hiding") TTkSignBraceOpen _tkSignBraceOpen_,
+        @SuppressWarnings("hiding") PLambdaExpList _lambdaExpList_,
+        @SuppressWarnings("hiding") TTkSignBraceClose _tkSignBraceClose_)
     {
         // Constructor
         setTkReservedLambda(_tkReservedLambda_);
@@ -38,7 +44,13 @@ public final class ALambda extends PLambda
 
         setTkSignColon(_tkSignColon_);
 
-        setLambdaAuxExp(_lambdaAuxExp_);
+        setTerm(_term_);
+
+        setTkSignBraceOpen(_tkSignBraceOpen_);
+
+        setLambdaExpList(_lambdaExpList_);
+
+        setTkSignBraceClose(_tkSignBraceClose_);
 
     }
 
@@ -51,7 +63,10 @@ public final class ALambda extends PLambda
             cloneNode(this._idList_),
             cloneNode(this._tkSignParClose_),
             cloneNode(this._tkSignColon_),
-            cloneNode(this._lambdaAuxExp_));
+            cloneNode(this._term_),
+            cloneNode(this._tkSignBraceOpen_),
+            cloneNode(this._lambdaExpList_),
+            cloneNode(this._tkSignBraceClose_));
     }
 
     @Override
@@ -185,16 +200,16 @@ public final class ALambda extends PLambda
         this._tkSignColon_ = node;
     }
 
-    public PLambdaAuxExp getLambdaAuxExp()
+    public PTerm getTerm()
     {
-        return this._lambdaAuxExp_;
+        return this._term_;
     }
 
-    public void setLambdaAuxExp(PLambdaAuxExp node)
+    public void setTerm(PTerm node)
     {
-        if(this._lambdaAuxExp_ != null)
+        if(this._term_ != null)
         {
-            this._lambdaAuxExp_.parent(null);
+            this._term_.parent(null);
         }
 
         if(node != null)
@@ -207,7 +222,82 @@ public final class ALambda extends PLambda
             node.parent(this);
         }
 
-        this._lambdaAuxExp_ = node;
+        this._term_ = node;
+    }
+
+    public TTkSignBraceOpen getTkSignBraceOpen()
+    {
+        return this._tkSignBraceOpen_;
+    }
+
+    public void setTkSignBraceOpen(TTkSignBraceOpen node)
+    {
+        if(this._tkSignBraceOpen_ != null)
+        {
+            this._tkSignBraceOpen_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._tkSignBraceOpen_ = node;
+    }
+
+    public PLambdaExpList getLambdaExpList()
+    {
+        return this._lambdaExpList_;
+    }
+
+    public void setLambdaExpList(PLambdaExpList node)
+    {
+        if(this._lambdaExpList_ != null)
+        {
+            this._lambdaExpList_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._lambdaExpList_ = node;
+    }
+
+    public TTkSignBraceClose getTkSignBraceClose()
+    {
+        return this._tkSignBraceClose_;
+    }
+
+    public void setTkSignBraceClose(TTkSignBraceClose node)
+    {
+        if(this._tkSignBraceClose_ != null)
+        {
+            this._tkSignBraceClose_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._tkSignBraceClose_ = node;
     }
 
     @Override
@@ -219,7 +309,10 @@ public final class ALambda extends PLambda
             + toString(this._idList_)
             + toString(this._tkSignParClose_)
             + toString(this._tkSignColon_)
-            + toString(this._lambdaAuxExp_);
+            + toString(this._term_)
+            + toString(this._tkSignBraceOpen_)
+            + toString(this._lambdaExpList_)
+            + toString(this._tkSignBraceClose_);
     }
 
     @Override
@@ -256,9 +349,27 @@ public final class ALambda extends PLambda
             return;
         }
 
-        if(this._lambdaAuxExp_ == child)
+        if(this._term_ == child)
         {
-            this._lambdaAuxExp_ = null;
+            this._term_ = null;
+            return;
+        }
+
+        if(this._tkSignBraceOpen_ == child)
+        {
+            this._tkSignBraceOpen_ = null;
+            return;
+        }
+
+        if(this._lambdaExpList_ == child)
+        {
+            this._lambdaExpList_ = null;
+            return;
+        }
+
+        if(this._tkSignBraceClose_ == child)
+        {
+            this._tkSignBraceClose_ = null;
             return;
         }
 
@@ -299,9 +410,27 @@ public final class ALambda extends PLambda
             return;
         }
 
-        if(this._lambdaAuxExp_ == oldChild)
+        if(this._term_ == oldChild)
         {
-            setLambdaAuxExp((PLambdaAuxExp) newChild);
+            setTerm((PTerm) newChild);
+            return;
+        }
+
+        if(this._tkSignBraceOpen_ == oldChild)
+        {
+            setTkSignBraceOpen((TTkSignBraceOpen) newChild);
+            return;
+        }
+
+        if(this._lambdaExpList_ == oldChild)
+        {
+            setLambdaExpList((PLambdaExpList) newChild);
+            return;
+        }
+
+        if(this._tkSignBraceClose_ == oldChild)
+        {
+            setTkSignBraceClose((TTkSignBraceClose) newChild);
             return;
         }
 

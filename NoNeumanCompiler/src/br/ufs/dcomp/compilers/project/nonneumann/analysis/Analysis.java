@@ -34,6 +34,8 @@ public interface Analysis extends Switch
     void caseANegBoolExp(ANegBoolExp node);
     void caseAOrExp(AOrExp node);
     void caseAAndExp(AAndExp node);
+    void caseAIfStmtExp(AIfStmtExp node);
+    void caseALambdaExp(ALambdaExp node);
     void caseAOpExp(AOpExp node);
     void caseAFactorOp(AFactorOp node);
     void caseAPlusOp(APlusOp node);
@@ -45,7 +47,6 @@ public interface Analysis extends Switch
     void caseAModFactor(AModFactor node);
     void caseALiteralTerm(ALiteralTerm node);
     void caseAFunctionCallTerm(AFunctionCallTerm node);
-    void caseALambdaTerm(ALambdaTerm node);
     void caseAExpTerm(AExpTerm node);
     void caseANegation(ANegation node);
     void caseABooleanValueLiteral(ABooleanValueLiteral node);
@@ -60,13 +61,15 @@ public interface Analysis extends Switch
     void caseAIdFunctionCall(AIdFunctionCall node);
     void caseAExpListExpList(AExpListExpList node);
     void caseAExpListAuxExpListAux(AExpListAuxExpListAux node);
-    void caseABlocoExpBlocoExp(ABlocoExpBlocoExp node);
     void caseADecConsDecCons(ADecConsDecCons node);
-    void caseADecConsAuxDecConsAux(ADecConsAuxDecConsAux node);
     void caseALambda(ALambda node);
-    void caseALambdaAuxExp(ALambdaAuxExp node);
+    void caseALambdaExpList(ALambdaExpList node);
+    void caseALambdaExpListAux(ALambdaExpListAux node);
     void caseAIdList(AIdList node);
     void caseAIdListAux(AIdListAux node);
+    void caseAIfStmt(AIfStmt node);
+    void caseAIfStmtExpAux(AIfStmtExpAux node);
+    void caseAIfStmtElseAux(AIfStmtElseAux node);
 
     void caseTTkCommentLine(TTkCommentLine node);
     void caseTTkCommentMultiLine(TTkCommentMultiLine node);
@@ -98,6 +101,8 @@ public interface Analysis extends Switch
     void caseTTkSignExclamation(TTkSignExclamation node);
     void caseTTkSignParOpen(TTkSignParOpen node);
     void caseTTkSignParClose(TTkSignParClose node);
+    void caseTTkSignBraceOpen(TTkSignBraceOpen node);
+    void caseTTkSignBraceClose(TTkSignBraceClose node);
     void caseTTkSignBoolEqual(TTkSignBoolEqual node);
     void caseTTkSignBoolGt(TTkSignBoolGt node);
     void caseTTkSignBoolLt(TTkSignBoolLt node);

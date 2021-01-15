@@ -2,7 +2,7 @@
 
 package br.ufs.dcomp.compilers.project.nonneumann.node;
 
-public abstract class PDecConsAux extends Node
+public abstract class PIfStmtExpAux extends Node
 {
     // Empty body
 }

@@ -2,12 +2,14 @@
 
 package br.ufs.dcomp.compilers.project.nonneumann.node;
 
+import java.util.*;
 import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 
 @SuppressWarnings("nls")
 public final class AExpTerm extends PTerm
 {
     private TTkSignParOpen _tkSignParOpen_;
+    private final LinkedList<PDecCons> _decCons_ = new LinkedList<PDecCons>();
     private PExp _exp_;
     private TTkSignParClose _tkSignParClose_;
 
@@ -18,11 +20,14 @@ public final class AExpTerm extends PTerm
 
     public AExpTerm(
         @SuppressWarnings("hiding") TTkSignParOpen _tkSignParOpen_,
+        @SuppressWarnings("hiding") List<?> _decCons_,
         @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TTkSignParClose _tkSignParClose_)
     {
         // Constructor
         setTkSignParOpen(_tkSignParOpen_);
+
+        setDecCons(_decCons_);
 
         setExp(_exp_);
 
@@ -35,6 +40,7 @@ public final class AExpTerm extends PTerm
     {
         return new AExpTerm(
             cloneNode(this._tkSignParOpen_),
+            cloneList(this._decCons_),
             cloneNode(this._exp_),
             cloneNode(this._tkSignParClose_));
     }
@@ -68,6 +74,32 @@ public final class AExpTerm extends PTerm
         }
 
         this._tkSignParOpen_ = node;
+    }
+
+    public LinkedList<PDecCons> getDecCons()
+    {
+        return this._decCons_;
+    }
+
+    public void setDecCons(List<?> list)
+    {
+        for(PDecCons e : this._decCons_)
+        {
+            e.parent(null);
+        }
+        this._decCons_.clear();
+
+        for(Object obj_e : list)
+        {
+            PDecCons e = (PDecCons) obj_e;
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
+
+            e.parent(this);
+            this._decCons_.add(e);
+        }
     }
 
     public PExp getExp()
@@ -125,6 +157,7 @@ public final class AExpTerm extends PTerm
     {
         return ""
             + toString(this._tkSignParOpen_)
+            + toString(this._decCons_)
             + toString(this._exp_)
             + toString(this._tkSignParClose_);
     }
@@ -136,6 +169,11 @@ public final class AExpTerm extends PTerm
         if(this._tkSignParOpen_ == child)
         {
             this._tkSignParOpen_ = null;
+            return;
+        }
+
+        if(this._decCons_.remove(child))
+        {
             return;
         }
 
@@ -162,6 +200,24 @@ public final class AExpTerm extends PTerm
         {
             setTkSignParOpen((TTkSignParOpen) newChild);
             return;
+        }
+
+        for(ListIterator<PDecCons> i = this._decCons_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PDecCons) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         if(this._exp_ == oldChild)

@@ -178,32 +178,44 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTTkSignBoolEqual(@SuppressWarnings("unused") TTkSignBoolEqual node)
+    public void caseTTkSignBraceOpen(@SuppressWarnings("unused") TTkSignBraceOpen node)
     {
         this.index = 28;
     }
 
     @Override
-    public void caseTTkSignBoolGt(@SuppressWarnings("unused") TTkSignBoolGt node)
+    public void caseTTkSignBraceClose(@SuppressWarnings("unused") TTkSignBraceClose node)
     {
         this.index = 29;
     }
 
     @Override
-    public void caseTTkSignBoolLt(@SuppressWarnings("unused") TTkSignBoolLt node)
+    public void caseTTkSignBoolEqual(@SuppressWarnings("unused") TTkSignBoolEqual node)
     {
         this.index = 30;
     }
 
     @Override
-    public void caseTTkId(@SuppressWarnings("unused") TTkId node)
+    public void caseTTkSignBoolGt(@SuppressWarnings("unused") TTkSignBoolGt node)
     {
         this.index = 31;
     }
 
     @Override
-    public void caseEOF(@SuppressWarnings("unused") EOF node)
+    public void caseTTkSignBoolLt(@SuppressWarnings("unused") TTkSignBoolLt node)
     {
         this.index = 32;
+    }
+
+    @Override
+    public void caseTTkId(@SuppressWarnings("unused") TTkId node)
+    {
+        this.index = 33;
+    }
+
+    @Override
+    public void caseEOF(@SuppressWarnings("unused") EOF node)
+    {
+        this.index = 34;
     }
 }
