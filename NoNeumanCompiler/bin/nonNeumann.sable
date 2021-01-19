@@ -73,36 +73,49 @@ Productions
 	parameters_function_aux = tk_sign_par_open parameters* tk_sign_par_close;
 	
 	exp_function_aux = tk_sign_par_open exp tk_sign_par_close;
-	
-	type = {tk_reserved_type_int}tk_reserved_type_int
-		|{tk_reserved_type_real}tk_reserved_type_real
-		|{tk_reserved_type_bool}tk_reserved_type_bool;
 		
+	signature = type tk_id tk_sign_par_open parameter_signature tk_sign_par_close;
+
+	lambda = tk_reserved_lambda tk_sign_par_open id_list? tk_sign_par_close tk_sign_colon term tk_sign_brace_open lambda_exp_list? tk_sign_brace_close;	
+	
+	dec_cons = {dec_cons}tk_sign_par_open tk_reserved_const type tk_id exp tk_sign_par_close;
+
+	parameters_signature_aux = tk_sign_comma parameters_signature;
+	
+	lambda_exp_list = exp lambda_exp_list_aux*;
+
+	type = {tk_reserved_type_int}tk_reserved_type_int
+		|{tk_reserved_type_bool}tk_reserved_type_bool
+		|{tk_reserved_type_real}tk_reserved_type_real;	
+		
+	
+	lambda_exp_list_aux = tk_sign_comma exp;
+	
+	boolean_value = {tk_reserved_bool_true}tk_reserved_bool_true
+		|{tk_reserved_bool_false}tk_reserved_bool_false;	
+	
 	parameters = parameter parameters_aux*;
 	
 	parameters_aux = tk_sign_comma parameter;
 	
+
+	term = {literal} literal 
+		|{function_call} function_call
+		|{exp} tk_sign_par_open dec_cons* exp tk_sign_par_close;	
+	
 	parameter =  {dec}type tk_id
 		|{signature}signature;
-		
-	signature = type tk_id tk_sign_par_open parameter_signature tk_sign_par_close;
-	
-	parameters_signature = parameter_signature parameters_signature_aux*;
-	
-	parameters_signature_aux = tk_sign_comma parameters_signature;
 	
 	parameter_signature = {type}type
 		|{signature}signature;
 		
-	exp = {gt} exp tk_sign_bool_gt op
-		|{lt}exp tk_sign_bool_lt op
-		|{equal}exp tk_sign_bool_equal op
-		|{neg_bool} tk_sign_exclamation op
-		|{or}exp tk_reserved_bool_or op
-		|{and}exp tk_reserved_bool_and op
-		|{if_stmt} if_stmt
-		|{lambda} lambda
-		|{op}op;
+	if_stmt = if_stmt_exp_aux tk_reserved_then term if_stmt_else_aux;
+		
+	parameters_signature = parameter_signature parameters_signature_aux*;	
+	
+	id_list = tk_id id_list_aux*;
+	
+	id_list_aux = tk_sign_comma tk_id;
 	
 	op = {factor}factor
 		|{plus}op tk_sign_plus factor
@@ -110,22 +123,29 @@ Productions
 			
 	factor = {term} term
 		|{mult} factor tk_sign_mult term
-		|{div} factor tk_sign_div term
 		|{neg} negation
+		|{div} factor tk_sign_div term
 		|{mod} factor tk_sign_mod term;
-		
-	term = {literal} literal 
-		|{function_call} function_call
-		|{exp} tk_sign_par_open dec_cons* exp tk_sign_par_close;
 		
 	negation = tk_sign_minus term;
 	
 	literal = {boolean_value}boolean_value
 		|{numeral_float}numeral_float
 		|{numeral_int}numeral_int;
+
+	exp = {gt} exp tk_sign_bool_gt op
+		|{lt}exp tk_sign_bool_lt op
+		|{equal}exp tk_sign_bool_equal op
+		|{neg_bool} tk_sign_exclamation op
+		|{and}exp tk_reserved_bool_and op
+		|{or}exp tk_reserved_bool_or op
+		|{if_stmt} if_stmt
+		|{lambda} lambda
+		|{op}op;
 		
-	boolean_value = {tk_reserved_bool_true}tk_reserved_bool_true
-		|{tk_reserved_bool_false}tk_reserved_bool_false;
+	if_stmt_exp_aux = tk_reserved_if term;
+	
+	if_stmt_else_aux = tk_reserved_else term;
 	
 	numeral_float = {tk_number_float}tk_number_float
 		|{tk_number_float_cientific_notation}tk_number_float_cientific_notation;
@@ -138,22 +158,7 @@ Productions
 	exp_list = {exp_list}exp exp_list_aux*;
 		
 	exp_list_aux = {exp_list_aux}tk_sign_comma exp;
-	
-	dec_cons = {dec_cons}tk_sign_par_open tk_reserved_const type tk_id exp tk_sign_par_close;
 		
-	lambda = tk_reserved_lambda tk_sign_par_open id_list? tk_sign_par_close tk_sign_colon term tk_sign_brace_open lambda_exp_list? tk_sign_brace_close;
 	
-	lambda_exp_list = exp lambda_exp_list_aux*;
-	
-	lambda_exp_list_aux = tk_sign_comma exp;
+
 		
-	id_list = tk_id id_list_aux*;
-	
-	id_list_aux = tk_sign_comma tk_id;
-	
-	if_stmt = if_stmt_exp_aux tk_reserved_then term if_stmt_else_aux;
-	
-	if_stmt_exp_aux = tk_reserved_if term;
-	
-	if_stmt_else_aux = tk_reserved_else term;
-	
