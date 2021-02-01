@@ -737,13 +737,13 @@ public class Parser
         {
             // Block
         PAType patypeNode2;
-        PAParameters paparametersNode3;
-        PAExp paexpNode4;
+        PAParametersFunctionAux paparametersfunctionauxNode3;
+        PAExpFunctionAux paexpfunctionauxNode4;
         patypeNode2 = (PAType)nodeArrayList3.get(0);
-        paparametersNode3 = (PAParameters)nodeArrayList5.get(0);
-        paexpNode4 = (PAExp)nodeArrayList7.get(0);
+        paparametersfunctionauxNode3 = (PAParametersFunctionAux)nodeArrayList5.get(0);
+        paexpfunctionauxNode4 = (PAExpFunctionAux)nodeArrayList7.get(0);
 
-        pafunctiondecNode1 = new AAFunctionDec(patypeNode2, paparametersNode3, paexpNode4);
+        pafunctiondecNode1 = new AAFunctionDec(patypeNode2, paparametersfunctionauxNode3, paexpfunctionauxNode4);
         }
 	nodeList.add(pafunctiondecNode1);
         return nodeList;
@@ -769,13 +769,13 @@ public class Parser
         {
             // Block
         PAType patypeNode2;
-        PAParameters paparametersNode3;
-        PAExp paexpNode4;
+        PAParametersFunctionAux paparametersfunctionauxNode3;
+        PAExpFunctionAux paexpfunctionauxNode4;
         patypeNode2 = (PAType)nodeArrayList4.get(0);
-        paparametersNode3 = (PAParameters)nodeArrayList6.get(0);
-        paexpNode4 = (PAExp)nodeArrayList8.get(0);
+        paparametersfunctionauxNode3 = (PAParametersFunctionAux)nodeArrayList6.get(0);
+        paexpfunctionauxNode4 = (PAExpFunctionAux)nodeArrayList8.get(0);
 
-        pafunctiondecNode1 = new AAFunctionDec(patypeNode2, paparametersNode3, paexpNode4);
+        pafunctiondecNode1 = new AAFunctionDec(patypeNode2, paparametersfunctionauxNode3, paexpfunctionauxNode4);
         }
 	nodeList.add(pafunctiondecNode1);
         return nodeList;
@@ -790,7 +790,7 @@ public class Parser
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAParameters paparametersNode1;
+        PAParametersFunctionAux paparametersfunctionauxNode1;
         {
             // Block
         LinkedList<Object> listNode2 = new LinkedList<Object>();
@@ -798,9 +798,9 @@ public class Parser
             // Block
         }
 
-        paparametersNode1 = new AAParameters(listNode2);
+        paparametersfunctionauxNode1 = new AAParametersFunctionAux(listNode2);
         }
-	nodeList.add(paparametersNode1);
+	nodeList.add(paparametersfunctionauxNode1);
         return nodeList;
     }
 
@@ -814,7 +814,7 @@ public class Parser
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAParameters paparametersNode1;
+        PAParametersFunctionAux paparametersfunctionauxNode1;
         {
             // Block
         LinkedList<Object> listNode3 = new LinkedList<Object>();
@@ -828,9 +828,9 @@ public class Parser
 	}
         }
 
-        paparametersNode1 = new AAParameters(listNode3);
+        paparametersfunctionauxNode1 = new AAParametersFunctionAux(listNode3);
         }
-	nodeList.add(paparametersNode1);
+	nodeList.add(paparametersfunctionauxNode1);
         return nodeList;
     }
 
@@ -844,15 +844,15 @@ public class Parser
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAExp paexpNode1;
+        PAExpFunctionAux paexpfunctionauxNode1;
         {
             // Block
         PAExp paexpNode2;
         paexpNode2 = (PAExp)nodeArrayList2.get(0);
 
-        paexpNode1 = new AAParenthesisAExp(paexpNode2);
+        paexpfunctionauxNode1 = new AAExpFunctionAux(paexpNode2);
         }
-	nodeList.add(paexpNode1);
+	nodeList.add(paexpfunctionauxNode1);
         return nodeList;
     }
 
@@ -1218,9 +1218,17 @@ public class Parser
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAParameter paparameterNode1;
-        paparameterNode1 = (PAParameter)nodeArrayList1.get(0);
-	nodeList.add(paparameterNode1);
+        PAParameters paparametersNode1;
+        {
+            // Block
+        PAParameter paparameterNode2;
+        PAParametersAux paparametersauxNode3;
+        paparameterNode2 = (PAParameter)nodeArrayList1.get(0);
+        paparametersauxNode3 = (PAParametersAux)nodeArrayList2.get(0);
+
+        paparametersNode1 = new AAParameters(paparameterNode2, paparametersauxNode3);
+        }
+	nodeList.add(paparametersNode1);
         return nodeList;
     }
 
@@ -1233,9 +1241,15 @@ public class Parser
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAParameter paparameterNode1;
-        paparameterNode1 = (PAParameter)nodeArrayList2.get(0);
-	nodeList.add(paparameterNode1);
+        PAParametersAux paparametersauxNode1;
+        {
+            // Block
+        PAParameter paparameterNode2;
+        paparameterNode2 = (PAParameter)nodeArrayList2.get(0);
+
+        paparametersauxNode1 = new AAParametersAux(paparameterNode2);
+        }
+	nodeList.add(paparametersauxNode1);
         return nodeList;
     }
 
@@ -2345,11 +2359,11 @@ public class Parser
         LinkedList<Object> listNode2 = new LinkedList<Object>();
         {
             // Block
-        PAParameter paparameterNode1;
-        paparameterNode1 = (PAParameter)nodeArrayList1.get(0);
-	if(paparameterNode1 != null)
+        PAParameters paparametersNode1;
+        paparametersNode1 = (PAParameters)nodeArrayList1.get(0);
+	if(paparametersNode1 != null)
 	{
-	  listNode2.add(paparameterNode1);
+	  listNode2.add(paparametersNode1);
 	}
         }
 	nodeList.add(listNode2);
@@ -2369,16 +2383,16 @@ public class Parser
         {
             // Block
         LinkedList<Object> listNode1 = new LinkedList<Object>();
-        PAParameter paparameterNode2;
+        PAParameters paparametersNode2;
         listNode1 = (LinkedList)nodeArrayList1.get(0);
-        paparameterNode2 = (PAParameter)nodeArrayList2.get(0);
+        paparametersNode2 = (PAParameters)nodeArrayList2.get(0);
 	if(listNode1 != null)
 	{
 	  listNode3.addAll(listNode1);
 	}
-	if(paparameterNode2 != null)
+	if(paparametersNode2 != null)
 	{
-	  listNode3.add(paparameterNode2);
+	  listNode3.add(paparametersNode2);
 	}
         }
 	nodeList.add(listNode3);

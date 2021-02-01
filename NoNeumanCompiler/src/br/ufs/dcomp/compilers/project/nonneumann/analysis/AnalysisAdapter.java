@@ -405,6 +405,24 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAAParametersFunctionAux(AAParametersFunctionAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAExpFunctionAux(AAExpFunctionAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAParametersAux(AAParametersAux node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTTkCommentLine(TTkCommentLine node)
     {
         defaultCase(node);

@@ -2,13 +2,13 @@
 
 package br.ufs.dcomp.compilers.project.nonneumann.node;
 
-import java.util.*;
 import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 
 @SuppressWarnings("nls")
 public final class AAParameters extends PAParameters
 {
-    private final LinkedList<PAParameter> _aParameter_ = new LinkedList<PAParameter>();
+    private PAParameter _aParameter_;
+    private PAParametersAux _aParametersAux_;
 
     public AAParameters()
     {
@@ -16,10 +16,13 @@ public final class AAParameters extends PAParameters
     }
 
     public AAParameters(
-        @SuppressWarnings("hiding") List<?> _aParameter_)
+        @SuppressWarnings("hiding") PAParameter _aParameter_,
+        @SuppressWarnings("hiding") PAParametersAux _aParametersAux_)
     {
         // Constructor
         setAParameter(_aParameter_);
+
+        setAParametersAux(_aParametersAux_);
 
     }
 
@@ -27,7 +30,8 @@ public final class AAParameters extends PAParameters
     public Object clone()
     {
         return new AAParameters(
-            cloneList(this._aParameter_));
+            cloneNode(this._aParameter_),
+            cloneNode(this._aParametersAux_));
     }
 
     @Override
@@ -36,45 +40,77 @@ public final class AAParameters extends PAParameters
         ((Analysis) sw).caseAAParameters(this);
     }
 
-    public LinkedList<PAParameter> getAParameter()
+    public PAParameter getAParameter()
     {
         return this._aParameter_;
     }
 
-    public void setAParameter(List<?> list)
+    public void setAParameter(PAParameter node)
     {
-        for(PAParameter e : this._aParameter_)
+        if(this._aParameter_ != null)
         {
-            e.parent(null);
+            this._aParameter_.parent(null);
         }
-        this._aParameter_.clear();
 
-        for(Object obj_e : list)
+        if(node != null)
         {
-            PAParameter e = (PAParameter) obj_e;
-            if(e.parent() != null)
+            if(node.parent() != null)
             {
-                e.parent().removeChild(e);
+                node.parent().removeChild(node);
             }
 
-            e.parent(this);
-            this._aParameter_.add(e);
+            node.parent(this);
         }
+
+        this._aParameter_ = node;
+    }
+
+    public PAParametersAux getAParametersAux()
+    {
+        return this._aParametersAux_;
+    }
+
+    public void setAParametersAux(PAParametersAux node)
+    {
+        if(this._aParametersAux_ != null)
+        {
+            this._aParametersAux_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._aParametersAux_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._aParameter_);
+            + toString(this._aParameter_)
+            + toString(this._aParametersAux_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._aParameter_.remove(child))
+        if(this._aParameter_ == child)
         {
+            this._aParameter_ = null;
+            return;
+        }
+
+        if(this._aParametersAux_ == child)
+        {
+            this._aParametersAux_ = null;
             return;
         }
 
@@ -85,22 +121,16 @@ public final class AAParameters extends PAParameters
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        for(ListIterator<PAParameter> i = this._aParameter_.listIterator(); i.hasNext();)
+        if(this._aParameter_ == oldChild)
         {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PAParameter) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
+            setAParameter((PAParameter) newChild);
+            return;
+        }
 
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
+        if(this._aParametersAux_ == oldChild)
+        {
+            setAParametersAux((PAParametersAux) newChild);
+            return;
         }
 
         throw new RuntimeException("Not a child.");

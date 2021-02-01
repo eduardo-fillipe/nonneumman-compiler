@@ -75,13 +75,13 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAAFunctionDec(AAFunctionDec node)
     {
         inAAFunctionDec(node);
-        if(node.getAExp() != null)
+        if(node.getAExpFunctionAux() != null)
         {
-            node.getAExp().apply(this);
+            node.getAExpFunctionAux().apply(this);
         }
-        if(node.getAParameters() != null)
+        if(node.getAParametersFunctionAux() != null)
         {
-            node.getAParameters().apply(this);
+            node.getAParametersFunctionAux().apply(this);
         }
         if(node.getAType() != null)
         {
@@ -284,13 +284,13 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAAParameters(AAParameters node)
     {
         inAAParameters(node);
+        if(node.getAParametersAux() != null)
         {
-            List<PAParameter> copy = new ArrayList<PAParameter>(node.getAParameter());
-            Collections.reverse(copy);
-            for(PAParameter e : copy)
-            {
-                e.apply(this);
-            }
+            node.getAParametersAux().apply(this);
+        }
+        if(node.getAParameter() != null)
+        {
+            node.getAParameter().apply(this);
         }
         outAAParameters(node);
     }
@@ -1337,5 +1337,72 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getAParameterSignature().apply(this);
         }
         outAAParametersSignature(node);
+    }
+
+    public void inAAParametersFunctionAux(AAParametersFunctionAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAParametersFunctionAux(AAParametersFunctionAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAParametersFunctionAux(AAParametersFunctionAux node)
+    {
+        inAAParametersFunctionAux(node);
+        {
+            List<PAParameters> copy = new ArrayList<PAParameters>(node.getAParameters());
+            Collections.reverse(copy);
+            for(PAParameters e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outAAParametersFunctionAux(node);
+    }
+
+    public void inAAExpFunctionAux(AAExpFunctionAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAExpFunctionAux(AAExpFunctionAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAExpFunctionAux(AAExpFunctionAux node)
+    {
+        inAAExpFunctionAux(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAAExpFunctionAux(node);
+    }
+
+    public void inAAParametersAux(AAParametersAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAParametersAux(AAParametersAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAParametersAux(AAParametersAux node)
+    {
+        inAAParametersAux(node);
+        if(node.getAParameter() != null)
+        {
+            node.getAParameter().apply(this);
+        }
+        outAAParametersAux(node);
     }
 }

@@ -67,6 +67,9 @@ public interface Analysis extends Switch
     void caseAAExpListAux(AAExpListAux node);
     void caseAAParametersSignatureAux(AAParametersSignatureAux node);
     void caseAAParametersSignature(AAParametersSignature node);
+    void caseAAParametersFunctionAux(AAParametersFunctionAux node);
+    void caseAAExpFunctionAux(AAExpFunctionAux node);
+    void caseAAParametersAux(AAParametersAux node);
 
     void caseTTkCommentLine(TTkCommentLine node);
     void caseTTkCommentMultiLine(TTkCommentMultiLine node);

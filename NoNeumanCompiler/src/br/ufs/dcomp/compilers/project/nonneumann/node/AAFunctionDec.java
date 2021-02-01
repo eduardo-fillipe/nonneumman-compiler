@@ -8,8 +8,8 @@ import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 public final class AAFunctionDec extends PAFunctionDec
 {
     private PAType _aType_;
-    private PAParameters _aParameters_;
-    private PAExp _aExp_;
+    private PAParametersFunctionAux _aParametersFunctionAux_;
+    private PAExpFunctionAux _aExpFunctionAux_;
 
     public AAFunctionDec()
     {
@@ -18,15 +18,15 @@ public final class AAFunctionDec extends PAFunctionDec
 
     public AAFunctionDec(
         @SuppressWarnings("hiding") PAType _aType_,
-        @SuppressWarnings("hiding") PAParameters _aParameters_,
-        @SuppressWarnings("hiding") PAExp _aExp_)
+        @SuppressWarnings("hiding") PAParametersFunctionAux _aParametersFunctionAux_,
+        @SuppressWarnings("hiding") PAExpFunctionAux _aExpFunctionAux_)
     {
         // Constructor
         setAType(_aType_);
 
-        setAParameters(_aParameters_);
+        setAParametersFunctionAux(_aParametersFunctionAux_);
 
-        setAExp(_aExp_);
+        setAExpFunctionAux(_aExpFunctionAux_);
 
     }
 
@@ -35,8 +35,8 @@ public final class AAFunctionDec extends PAFunctionDec
     {
         return new AAFunctionDec(
             cloneNode(this._aType_),
-            cloneNode(this._aParameters_),
-            cloneNode(this._aExp_));
+            cloneNode(this._aParametersFunctionAux_),
+            cloneNode(this._aExpFunctionAux_));
     }
 
     @Override
@@ -70,16 +70,16 @@ public final class AAFunctionDec extends PAFunctionDec
         this._aType_ = node;
     }
 
-    public PAParameters getAParameters()
+    public PAParametersFunctionAux getAParametersFunctionAux()
     {
-        return this._aParameters_;
+        return this._aParametersFunctionAux_;
     }
 
-    public void setAParameters(PAParameters node)
+    public void setAParametersFunctionAux(PAParametersFunctionAux node)
     {
-        if(this._aParameters_ != null)
+        if(this._aParametersFunctionAux_ != null)
         {
-            this._aParameters_.parent(null);
+            this._aParametersFunctionAux_.parent(null);
         }
 
         if(node != null)
@@ -92,19 +92,19 @@ public final class AAFunctionDec extends PAFunctionDec
             node.parent(this);
         }
 
-        this._aParameters_ = node;
+        this._aParametersFunctionAux_ = node;
     }
 
-    public PAExp getAExp()
+    public PAExpFunctionAux getAExpFunctionAux()
     {
-        return this._aExp_;
+        return this._aExpFunctionAux_;
     }
 
-    public void setAExp(PAExp node)
+    public void setAExpFunctionAux(PAExpFunctionAux node)
     {
-        if(this._aExp_ != null)
+        if(this._aExpFunctionAux_ != null)
         {
-            this._aExp_.parent(null);
+            this._aExpFunctionAux_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +117,7 @@ public final class AAFunctionDec extends PAFunctionDec
             node.parent(this);
         }
 
-        this._aExp_ = node;
+        this._aExpFunctionAux_ = node;
     }
 
     @Override
@@ -125,8 +125,8 @@ public final class AAFunctionDec extends PAFunctionDec
     {
         return ""
             + toString(this._aType_)
-            + toString(this._aParameters_)
-            + toString(this._aExp_);
+            + toString(this._aParametersFunctionAux_)
+            + toString(this._aExpFunctionAux_);
     }
 
     @Override
@@ -139,15 +139,15 @@ public final class AAFunctionDec extends PAFunctionDec
             return;
         }
 
-        if(this._aParameters_ == child)
+        if(this._aParametersFunctionAux_ == child)
         {
-            this._aParameters_ = null;
+            this._aParametersFunctionAux_ = null;
             return;
         }
 
-        if(this._aExp_ == child)
+        if(this._aExpFunctionAux_ == child)
         {
-            this._aExp_ = null;
+            this._aExpFunctionAux_ = null;
             return;
         }
 
@@ -164,15 +164,15 @@ public final class AAFunctionDec extends PAFunctionDec
             return;
         }
 
-        if(this._aParameters_ == oldChild)
+        if(this._aParametersFunctionAux_ == oldChild)
         {
-            setAParameters((PAParameters) newChild);
+            setAParametersFunctionAux((PAParametersFunctionAux) newChild);
             return;
         }
 
-        if(this._aExp_ == oldChild)
+        if(this._aExpFunctionAux_ == oldChild)
         {
-            setAExp((PAExp) newChild);
+            setAExpFunctionAux((PAExpFunctionAux) newChild);
             return;
         }
 
