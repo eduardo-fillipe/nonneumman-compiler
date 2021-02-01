@@ -191,7 +191,7 @@ a_parameter_signature = {type} a_type
 	
 	
 	
-a_parameters = a_parameter a_parameters_aux;		
+a_parameters = a_parameter a_parameters_aux*;		
 a_signature = a_type tk_id a_parameters_signature;
 
 
@@ -255,6 +255,6 @@ a_exp_list_aux = a_exp;
 a_parameters_signature_aux = a_parameter_signature;			
 a_parameters_signature = a_parameter_signature a_parameters_signature_aux*;
 
-a_parameters_function_aux = a_parameters;
+a_parameters_function_aux = a_parameters*;
 a_exp_function_aux =  a_exp;
 a_parameters_aux = a_parameter;
