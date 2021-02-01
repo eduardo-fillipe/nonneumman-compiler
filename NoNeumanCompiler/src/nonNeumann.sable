@@ -96,7 +96,7 @@ Productions
 	boolean_value{-> a_boolean_value} = {tk_reserved_bool_true}tk_reserved_bool_true{-> New a_boolean_value.tk_reserved_bool_true(tk_reserved_bool_true)}
 		|{tk_reserved_bool_false}tk_reserved_bool_false {-> New a_boolean_value.tk_reserved_bool_false(tk_reserved_bool_false)};	
 	
-	parameters{-> a_parameters} = parameter parameters_aux{-> New a_parameters(parameter.a_parameter, parameters_aux.a_parameters_aux)};
+	parameters{-> a_parameters} = parameter parameters_aux* {-> New a_parameters(parameter.a_parameter, [parameters_aux.a_parameters_aux])};
 	
 	parameters_aux{-> a_parameters_aux} = tk_sign_comma parameter{-> New a_parameters_aux(parameter.a_parameter)};
 	
@@ -170,7 +170,7 @@ Abstract Syntax Tree
 
 
 
-//INÍCIO
+//INï¿½CIO
 a_program = a_function_dec+;
 a_function_dec = a_type a_parameters_function_aux a_exp_function_aux; 
 
@@ -179,7 +179,7 @@ a_type = {tk_reserved_type_int} tk_reserved_type_int
 	| {tk_reserved_type_bool} tk_reserved_type_bool
 	| {tk_reserved_type_real} tk_reserved_type_real;	
 
-//FUNÇÕES
+//FUNï¿½ï¿½ES
 
 a_function_call = tk_id a_exp_list*;
 
@@ -211,7 +211,7 @@ a_literal = {a_boolean_value} a_boolean_value
 a_numeral_int = {tk_number_integer_dec}tk_number_integer_dec
 	|{tk_number_integer_hex}tk_number_integer_hex;			
 			
-//EXPRESSÃO
+//EXPRESSï¿½O
 		
 a_exp = {a_if_stmt} [left]:a_exp [middle]:a_exp [right]:a_exp
 	| {a_or} [left]:a_exp [right]:a_exp
@@ -245,7 +245,7 @@ a_lambda =  a_id_list? a_exp a_lambda_exp_list?;
 a_lambda_exp_list = a_exp a_lambda_exp_list_aux*;
 a_lambda_exp_list_aux = a_exp;
 
-a_exp_list =  a_exp a_exp_list_aux*;		
+a_exp_list =  a_exp a_exp_list_aux*;
 a_exp_list_aux = a_exp;
 
 
@@ -255,6 +255,6 @@ a_exp_list_aux = a_exp;
 a_parameters_signature_aux = a_parameter_signature;			
 a_parameters_signature = a_parameter_signature a_parameters_signature_aux*;
 
-a_parameters_function_aux = a_parameters*;
+a_parameters_function_aux = a_parameters;
 a_exp_function_aux =  a_exp;
 a_parameters_aux = a_parameter;
