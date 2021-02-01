@@ -66,99 +66,185 @@ Ignored Tokens
 	tk_comment_multi_line;
 	
 Productions
-	program = function_dec+;
-	
-	function_dec = tk_reserved_entry? tk_sign_par_open tk_reserved_function type tk_id parameters_function_aux tk_sign_colon exp_function_aux tk_sign_par_close;
-	
-	parameters_function_aux = tk_sign_par_open parameters* tk_sign_par_close;
-	
-	exp_function_aux = tk_sign_par_open exp tk_sign_par_close;
-		
-	signature = type tk_id tk_sign_par_open parameter_signature tk_sign_par_close;
 
-	lambda = tk_reserved_lambda tk_sign_par_open id_list? tk_sign_par_close tk_sign_colon term tk_sign_brace_open lambda_exp_list? tk_sign_brace_close;	
+	program{-> a_program} = function_dec+{-> New a_program([function_dec.a_function_dec])};
 	
-	dec_cons = {dec_cons}tk_sign_par_open tk_reserved_const type tk_id exp tk_sign_par_close;
-
-	parameters_signature_aux = tk_sign_comma parameters_signature;
+	function_dec{-> a_function_dec} = tk_reserved_entry? tk_sign_par_open tk_reserved_function type tk_id parameters_function_aux tk_sign_colon exp_function_aux tk_sign_par_close
+	{-> New a_function_dec(type.a_type, parameters_function_aux.a_parameters, exp_function_aux.a_exp)};
 	
-	lambda_exp_list = exp lambda_exp_list_aux*;
+	parameters_function_aux{-> a_parameters} = tk_sign_par_open parameters* tk_sign_par_close {-> New a_parameters([parameters.a_parameter])};
+	
+	exp_function_aux{-> a_exp} = tk_sign_par_open exp tk_sign_par_close{-> New a_exp.a_parenthesis(exp.a_exp)};
+		
+	signature{-> a_signature} = type tk_id tk_sign_par_open parameters_signature tk_sign_par_close {->New a_signature(type.a_type, tk_id, parameters_signature.a_parameters_signature)};
 
-	type = {tk_reserved_type_int}tk_reserved_type_int
-		|{tk_reserved_type_bool}tk_reserved_type_bool
-		|{tk_reserved_type_real}tk_reserved_type_real;	
+	lambda{-> a_lambda} = tk_reserved_lambda tk_sign_par_open id_list? tk_sign_par_close tk_sign_colon term tk_sign_brace_open lambda_exp_list? tk_sign_brace_close{-> New a_lambda(id_list.a_id_list, term.a_exp, lambda_exp_list.a_lambda_exp_list)};	
+	
+	dec_cons{-> a_dec_cons} = {dec_cons} tk_sign_par_open tk_reserved_const type tk_id exp tk_sign_par_close{-> New a_dec_cons(type.a_type, tk_id, exp.a_exp)};
+
+	
+	
+	lambda_exp_list{-> a_lambda_exp_list} = exp lambda_exp_list_aux* {-> New a_lambda_exp_list(exp.a_exp, [lambda_exp_list_aux.a_lambda_exp_list_aux])};
+
+	type{-> a_type} = {tk_reserved_type_int}tk_reserved_type_int {-> New a_type.tk_reserved_type_int(tk_reserved_type_int)}
+		|{tk_reserved_type_bool}tk_reserved_type_bool {-> New a_type.tk_reserved_type_bool(tk_reserved_type_bool)}
+		|{tk_reserved_type_real}tk_reserved_type_real {-> New a_type.tk_reserved_type_real(tk_reserved_type_real)};
 		
 	
-	lambda_exp_list_aux = tk_sign_comma exp;
+	lambda_exp_list_aux{-> a_lambda_exp_list_aux} = tk_sign_comma exp{-> New a_lambda_exp_list_aux(exp.a_exp)};
 	
-	boolean_value = {tk_reserved_bool_true}tk_reserved_bool_true
-		|{tk_reserved_bool_false}tk_reserved_bool_false;	
+	boolean_value{-> a_boolean_value} = {tk_reserved_bool_true}tk_reserved_bool_true{-> New a_boolean_value.tk_reserved_bool_true(tk_reserved_bool_true)}
+		|{tk_reserved_bool_false}tk_reserved_bool_false {-> New a_boolean_value.tk_reserved_bool_false(tk_reserved_bool_false)};	
 	
-	parameters = parameter parameters_aux*;
+	parameters{-> a_parameter} = parameter parameters_aux{-> parameter.a_parameter};
 	
-	parameters_aux = tk_sign_comma parameter;
+	parameters_aux{-> a_parameter} = tk_sign_comma parameter{-> parameter.a_parameter};
 	
 
-	term = {literal} literal 
-		|{function_call} function_call
-		|{exp} tk_sign_par_open dec_cons* exp tk_sign_par_close;	
+	term{-> a_exp} = {literal} literal {-> New a_exp.a_literal(literal.a_literal)} 
+		|{function_call} function_call {-> New a_exp.a_function_call(function_call.a_function_call)}
+		|{exp} tk_sign_par_open dec_cons* exp tk_sign_par_close{-> New a_exp.a_exp_bloc([dec_cons.a_dec_cons], exp.a_exp)};	
 	
-	parameter =  {dec}type tk_id
-		|{signature}signature;
+	parameter{-> a_parameter} =  {dec} type tk_id {-> New a_parameter.dec(type.a_type, tk_id)}
+		|{signature}signature {-> New a_parameter.signature(signature.a_signature)}; 
 	
-	parameter_signature = {type}type
-		|{signature}signature;
+	parameter_signature{-> a_parameter_signature} = {type} type {-> New a_parameter_signature.type(type.a_type)}
+		|{signature} signature {-> New a_parameter_signature.signature(signature.a_signature)};
 		
-	if_stmt = if_stmt_exp_aux tk_reserved_then term if_stmt_else_aux;
+	parameters_signature_aux{-> a_parameters_signature_aux} = tk_sign_comma parameter_signature{-> New a_parameters_signature_aux(parameter_signature.a_parameter_signature)};		
+	
+	parameters_signature{-> a_parameters_signature} = parameter_signature parameters_signature_aux*{-> New a_parameters_signature(parameter_signature.a_parameter_signature, [parameters_signature_aux.a_parameters_signature_aux])};	
 		
-	parameters_signature = parameter_signature parameters_signature_aux*;	
+	if_stmt{-> a_exp} = if_stmt_exp_aux tk_reserved_then term if_stmt_else_aux{-> New a_exp.a_if_stmt(if_stmt_exp_aux.a_exp, term.a_exp, if_stmt_else_aux.a_exp)};
+		
+		
 	
-	id_list = tk_id id_list_aux*;
+	id_list{-> a_id_list} = tk_id id_list_aux*{-> New a_id_list(tk_id, [id_list_aux.a_id_list_aux])};
 	
-	id_list_aux = tk_sign_comma tk_id;
+	id_list_aux{-> a_id_list_aux} = tk_sign_comma tk_id{-> New a_id_list_aux(tk_id)};
 	
-	op = {factor}factor
-		|{plus}op tk_sign_plus factor
-  		|{minus}op tk_sign_minus factor;
+	op{-> a_exp} = {factor}factor {-> factor.a_exp}
+		|{plus}op tk_sign_plus factor {-> New a_exp.a_plus(op.a_exp, factor.a_exp)}
+  		|{minus}op tk_sign_minus factor {-> New a_exp.a_minus(op.a_exp, factor.a_exp)};
 			
-	factor = {term} term
-		|{mult} factor tk_sign_mult term
-		|{neg} negation
-		|{div} factor tk_sign_div term
-		|{mod} factor tk_sign_mod term;
+	factor{-> a_exp} = {term} term {-> term.a_exp}
+		|{mult} factor tk_sign_mult term {-> New a_exp.a_mult(factor.a_exp, term.a_exp) }
+		|{neg} negation {-> New a_exp.a_negation(negation.a_exp)}
+		|{div} factor tk_sign_div term {-> New a_exp.a_div(factor.a_exp, term.a_exp) }
+		|{mod} factor tk_sign_mod term {-> New a_exp.a_mod(factor.a_exp, term.a_exp) };
 		
-	negation = tk_sign_minus term;
+	negation{-> a_exp} = tk_sign_minus term {-> New a_exp.a_negation(term.a_exp)};
 	
-	literal = {boolean_value}boolean_value
-		|{numeral_float}numeral_float
-		|{numeral_int}numeral_int;
+	literal{-> a_literal} = {boolean_value}boolean_value {-> New a_literal.a_boolean_value(boolean_value.a_boolean_value)}
+		|{numeral_float}numeral_float  {-> New a_literal.a_numeral_float(numeral_float.a_numeral_float)}
+		|{numeral_int}numeral_int {-> New a_literal.a_numeral_int(numeral_int.a_numeral_int)};
 
-	exp = {gt} exp tk_sign_bool_gt op
-		|{lt}exp tk_sign_bool_lt op
-		|{equal}exp tk_sign_bool_equal op
-		|{neg_bool} tk_sign_exclamation op
-		|{and}exp tk_reserved_bool_and op
-		|{or}exp tk_reserved_bool_or op
-		|{if_stmt} if_stmt
-		|{lambda} lambda
-		|{op}op;
+	exp{-> a_exp} = {gt} exp tk_sign_bool_gt op {-> New a_exp.a_gt(exp.a_exp, op.a_exp)}
+		|{lt}exp tk_sign_bool_lt op {-> New a_exp.a_lt(exp.a_exp, op.a_exp)}
+		|{equal}exp tk_sign_bool_equal op {-> New a_exp.a_equal(exp.a_exp, op.a_exp)}
+		|{neg_bool} tk_sign_exclamation op {-> New a_exp.a_negation(op.a_exp)}
+		|{and}exp tk_reserved_bool_and op {-> New a_exp.a_and(exp.a_exp, op.a_exp)}
+		|{or}exp tk_reserved_bool_or op {-> New a_exp.a_or(exp.a_exp, op.a_exp)}
+		|{if_stmt} if_stmt {-> if_stmt.a_exp}
+		|{lambda} lambda {-> New a_exp.a_lambda(lambda.a_lambda)}
+		|{op}op {-> op.a_exp};
 		
-	if_stmt_exp_aux = tk_reserved_if term;
+	if_stmt_exp_aux{-> a_exp} = tk_reserved_if term{-> term.a_exp};
 	
-	if_stmt_else_aux = tk_reserved_else term;
+	if_stmt_else_aux{-> a_exp} = tk_reserved_else term{-> term.a_exp};
 	
-	numeral_float = {tk_number_float}tk_number_float
+	numeral_float{-> a_numeral_float} = {tk_number_float}tk_number_float {-> New a_numeral_float.tk_number_float(tk_number_float)}
+		|{tk_number_float_cientific_notation}tk_number_float_cientific_notation {-> New a_numeral_float.tk_number_float_cientific_notation(tk_number_float_cientific_notation)};
+		
+	numeral_int{-> a_numeral_int} = {tk_number_integer_dec}tk_number_integer_dec {-> New a_numeral_int.tk_number_integer_dec(tk_number_integer_dec)}
+		|{tk_number_integer_hex}tk_number_integer_hex{-> New a_numeral_int.tk_number_integer_hex(tk_number_integer_hex)}; 
+	
+	function_call{-> a_function_call} = {id}tk_id tk_sign_par_open exp_list? tk_sign_par_close{-> New a_function_call(tk_id, [exp_list.a_exp_list])};
+	
+	exp_list{-> a_exp_list} = {exp_list} exp exp_list_aux* {-> New a_exp_list(exp.a_exp, [exp_list_aux.a_exp_list_aux])};
+		
+	exp_list_aux{-> a_exp_list_aux} = {exp_list_aux}tk_sign_comma exp {-> New a_exp_list_aux(exp.a_exp)};
+		
+
+Abstract Syntax Tree
+
+//INÍCIO
+a_program = a_function_dec+;
+a_function_dec = a_type a_parameters a_exp; 
+
+//TIPOS			
+a_type = {tk_reserved_type_int} tk_reserved_type_int
+	| {tk_reserved_type_bool} tk_reserved_type_bool
+	| {tk_reserved_type_real} tk_reserved_type_real;	
+
+//FUNÇÕES
+
+a_function_call = tk_id a_exp_list*;
+
+a_parameter =  {dec} a_type tk_id
+	| {signature} a_signature;
+
+a_parameter_signature = {type} a_type
+	| {signature} a_signature;
+	
+a_parameters = a_parameter*;		
+a_signature = a_type tk_id a_parameters_signature;
+
+
+a_dec_cons = a_type tk_id a_exp;
+
+
+a_boolean_value = {tk_reserved_bool_true}tk_reserved_bool_true
+		|{tk_reserved_bool_false}tk_reserved_bool_false;
+		
+a_numeral_float = {tk_number_float}tk_number_float
 		|{tk_number_float_cientific_notation}tk_number_float_cientific_notation;
 		
-	numeral_int = {tk_number_integer_dec}tk_number_integer_dec
-		|{tk_number_integer_hex}tk_number_integer_hex;
-	
-	function_call = {id}tk_id tk_sign_par_open exp_list? tk_sign_par_close;
-	
-	exp_list = {exp_list}exp exp_list_aux*;
+a_literal = {a_boolean_value} a_boolean_value
+		|{a_numeral_float}a_numeral_float
+		|{a_numeral_int}a_numeral_int;		
 		
-	exp_list_aux = {exp_list_aux}tk_sign_comma exp;
+a_numeral_int = {tk_number_integer_dec}tk_number_integer_dec
+	|{tk_number_integer_hex}tk_number_integer_hex;			
+			
+//EXPRESSÃO
 		
+a_exp = {a_if_stmt} [left]:a_exp [middle]:a_exp [right]:a_exp
+	| {a_or} [left]:a_exp [right]:a_exp
+	| {a_and} [left]:a_exp [right]:a_exp
+	| {a_equal} [left]:a_exp [right]:a_exp
+	| {a_lt} [left]:a_exp [right]:a_exp
+	| {a_gt} [left]:a_exp [right]:a_exp
+	| {a_negation} a_exp
+	| {a_parenthesis} a_exp
+	| {a_mod} [left]:a_exp [right]:a_exp
+	| {a_mult} [left]:a_exp [right]:a_exp
+	| {a_div} [left]:a_exp [right]:a_exp
+	| {a_type} a_type
+	| {a_literal} a_literal
+	| {a_function_call} a_function_call
+	|{boolean_value}a_boolean_value
+	|{numeral_float}a_numeral_float
+	|{numeral_int}a_numeral_int
+	|{a_exp_bloc} a_dec_cons* a_exp
+	|{a_plus}[left]:a_exp [right]:a_exp 
+  	|{a_minus}[left]:a_exp [right]:a_exp
+  	|{a_lambda} a_lambda;
 	
+a_id_list = tk_id a_id_list_aux*;
+a_id_list_aux = tk_id;
+a_id = tk_id;
+a_list_exp = a_exp;
+a_bloc_exp = a_dec_cons* a_exp;
 
-		
+a_lambda =  a_id_list? a_exp a_lambda_exp_list?;
+a_lambda_exp_list = a_exp a_lambda_exp_list_aux*;
+a_lambda_exp_list_aux = a_exp;
+
+a_exp_list =  a_exp a_exp_list_aux*;		
+a_exp_list_aux = a_exp;
+
+
+a_parameters_signature_aux = a_parameters_signature;		
+	
+a_parameters_signature = a_parameter_signature a_parameters_signature_aux*;	

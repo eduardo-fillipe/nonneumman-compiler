@@ -32,1549 +32,1310 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inStart(node);
         node.getEOF().apply(this);
-        node.getPProgram().apply(this);
+        node.getPAProgram().apply(this);
         outStart(node);
     }
 
-    public void inAProgram(AProgram node)
+    public void inAAProgram(AAProgram node)
     {
         defaultIn(node);
     }
 
-    public void outAProgram(AProgram node)
+    public void outAAProgram(AAProgram node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAProgram(AProgram node)
+    public void caseAAProgram(AAProgram node)
     {
-        inAProgram(node);
+        inAAProgram(node);
         {
-            List<PFunctionDec> copy = new ArrayList<PFunctionDec>(node.getFunctionDec());
+            List<PAFunctionDec> copy = new ArrayList<PAFunctionDec>(node.getAFunctionDec());
             Collections.reverse(copy);
-            for(PFunctionDec e : copy)
+            for(PAFunctionDec e : copy)
             {
                 e.apply(this);
             }
         }
-        outAProgram(node);
+        outAAProgram(node);
     }
 
-    public void inAFunctionDec(AFunctionDec node)
+    public void inAAFunctionDec(AAFunctionDec node)
     {
         defaultIn(node);
     }
 
-    public void outAFunctionDec(AFunctionDec node)
+    public void outAAFunctionDec(AAFunctionDec node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAFunctionDec(AFunctionDec node)
+    public void caseAAFunctionDec(AAFunctionDec node)
     {
-        inAFunctionDec(node);
-        if(node.getTkSignParClose() != null)
+        inAAFunctionDec(node);
+        if(node.getAExp() != null)
         {
-            node.getTkSignParClose().apply(this);
+            node.getAExp().apply(this);
         }
-        if(node.getExpFunctionAux() != null)
+        if(node.getAParameters() != null)
         {
-            node.getExpFunctionAux().apply(this);
+            node.getAParameters().apply(this);
         }
-        if(node.getTkSignColon() != null)
+        if(node.getAType() != null)
         {
-            node.getTkSignColon().apply(this);
+            node.getAType().apply(this);
         }
-        if(node.getParametersFunctionAux() != null)
-        {
-            node.getParametersFunctionAux().apply(this);
-        }
-        if(node.getTkId() != null)
-        {
-            node.getTkId().apply(this);
-        }
-        if(node.getType() != null)
-        {
-            node.getType().apply(this);
-        }
-        if(node.getTkReservedFunction() != null)
-        {
-            node.getTkReservedFunction().apply(this);
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        if(node.getTkReservedEntry() != null)
-        {
-            node.getTkReservedEntry().apply(this);
-        }
-        outAFunctionDec(node);
+        outAAFunctionDec(node);
     }
 
-    public void inAParametersFunctionAux(AParametersFunctionAux node)
+    public void inATkReservedTypeIntAType(ATkReservedTypeIntAType node)
     {
         defaultIn(node);
     }
 
-    public void outAParametersFunctionAux(AParametersFunctionAux node)
+    public void outATkReservedTypeIntAType(ATkReservedTypeIntAType node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAParametersFunctionAux(AParametersFunctionAux node)
+    public void caseATkReservedTypeIntAType(ATkReservedTypeIntAType node)
     {
-        inAParametersFunctionAux(node);
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        {
-            List<PParameters> copy = new ArrayList<PParameters>(node.getParameters());
-            Collections.reverse(copy);
-            for(PParameters e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        outAParametersFunctionAux(node);
-    }
-
-    public void inAExpFunctionAux(AExpFunctionAux node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExpFunctionAux(AExpFunctionAux node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExpFunctionAux(AExpFunctionAux node)
-    {
-        inAExpFunctionAux(node);
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        outAExpFunctionAux(node);
-    }
-
-    public void inASignature(ASignature node)
-    {
-        defaultIn(node);
-    }
-
-    public void outASignature(ASignature node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseASignature(ASignature node)
-    {
-        inASignature(node);
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        if(node.getParameterSignature() != null)
-        {
-            node.getParameterSignature().apply(this);
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        if(node.getTkId() != null)
-        {
-            node.getTkId().apply(this);
-        }
-        if(node.getType() != null)
-        {
-            node.getType().apply(this);
-        }
-        outASignature(node);
-    }
-
-    public void inALambda(ALambda node)
-    {
-        defaultIn(node);
-    }
-
-    public void outALambda(ALambda node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseALambda(ALambda node)
-    {
-        inALambda(node);
-        if(node.getTkSignBraceClose() != null)
-        {
-            node.getTkSignBraceClose().apply(this);
-        }
-        if(node.getLambdaExpList() != null)
-        {
-            node.getLambdaExpList().apply(this);
-        }
-        if(node.getTkSignBraceOpen() != null)
-        {
-            node.getTkSignBraceOpen().apply(this);
-        }
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkSignColon() != null)
-        {
-            node.getTkSignColon().apply(this);
-        }
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        if(node.getIdList() != null)
-        {
-            node.getIdList().apply(this);
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        if(node.getTkReservedLambda() != null)
-        {
-            node.getTkReservedLambda().apply(this);
-        }
-        outALambda(node);
-    }
-
-    public void inADecConsDecCons(ADecConsDecCons node)
-    {
-        defaultIn(node);
-    }
-
-    public void outADecConsDecCons(ADecConsDecCons node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseADecConsDecCons(ADecConsDecCons node)
-    {
-        inADecConsDecCons(node);
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        if(node.getTkId() != null)
-        {
-            node.getTkId().apply(this);
-        }
-        if(node.getType() != null)
-        {
-            node.getType().apply(this);
-        }
-        if(node.getTkReservedConst() != null)
-        {
-            node.getTkReservedConst().apply(this);
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        outADecConsDecCons(node);
-    }
-
-    public void inAParametersSignatureAux(AParametersSignatureAux node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAParametersSignatureAux(AParametersSignatureAux node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAParametersSignatureAux(AParametersSignatureAux node)
-    {
-        inAParametersSignatureAux(node);
-        if(node.getParametersSignature() != null)
-        {
-            node.getParametersSignature().apply(this);
-        }
-        if(node.getTkSignComma() != null)
-        {
-            node.getTkSignComma().apply(this);
-        }
-        outAParametersSignatureAux(node);
-    }
-
-    public void inALambdaExpList(ALambdaExpList node)
-    {
-        defaultIn(node);
-    }
-
-    public void outALambdaExpList(ALambdaExpList node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseALambdaExpList(ALambdaExpList node)
-    {
-        inALambdaExpList(node);
-        {
-            List<PLambdaExpListAux> copy = new ArrayList<PLambdaExpListAux>(node.getLambdaExpListAux());
-            Collections.reverse(copy);
-            for(PLambdaExpListAux e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        outALambdaExpList(node);
-    }
-
-    public void inATkReservedTypeIntType(ATkReservedTypeIntType node)
-    {
-        defaultIn(node);
-    }
-
-    public void outATkReservedTypeIntType(ATkReservedTypeIntType node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseATkReservedTypeIntType(ATkReservedTypeIntType node)
-    {
-        inATkReservedTypeIntType(node);
+        inATkReservedTypeIntAType(node);
         if(node.getTkReservedTypeInt() != null)
         {
             node.getTkReservedTypeInt().apply(this);
         }
-        outATkReservedTypeIntType(node);
+        outATkReservedTypeIntAType(node);
     }
 
-    public void inATkReservedTypeBoolType(ATkReservedTypeBoolType node)
+    public void inATkReservedTypeBoolAType(ATkReservedTypeBoolAType node)
     {
         defaultIn(node);
     }
 
-    public void outATkReservedTypeBoolType(ATkReservedTypeBoolType node)
+    public void outATkReservedTypeBoolAType(ATkReservedTypeBoolAType node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATkReservedTypeBoolType(ATkReservedTypeBoolType node)
+    public void caseATkReservedTypeBoolAType(ATkReservedTypeBoolAType node)
     {
-        inATkReservedTypeBoolType(node);
+        inATkReservedTypeBoolAType(node);
         if(node.getTkReservedTypeBool() != null)
         {
             node.getTkReservedTypeBool().apply(this);
         }
-        outATkReservedTypeBoolType(node);
+        outATkReservedTypeBoolAType(node);
     }
 
-    public void inATkReservedTypeRealType(ATkReservedTypeRealType node)
+    public void inATkReservedTypeRealAType(ATkReservedTypeRealAType node)
     {
         defaultIn(node);
     }
 
-    public void outATkReservedTypeRealType(ATkReservedTypeRealType node)
+    public void outATkReservedTypeRealAType(ATkReservedTypeRealAType node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATkReservedTypeRealType(ATkReservedTypeRealType node)
+    public void caseATkReservedTypeRealAType(ATkReservedTypeRealAType node)
     {
-        inATkReservedTypeRealType(node);
+        inATkReservedTypeRealAType(node);
         if(node.getTkReservedTypeReal() != null)
         {
             node.getTkReservedTypeReal().apply(this);
         }
-        outATkReservedTypeRealType(node);
+        outATkReservedTypeRealAType(node);
     }
 
-    public void inALambdaExpListAux(ALambdaExpListAux node)
+    public void inAAFunctionCall(AAFunctionCall node)
     {
         defaultIn(node);
     }
 
-    public void outALambdaExpListAux(ALambdaExpListAux node)
+    public void outAAFunctionCall(AAFunctionCall node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseALambdaExpListAux(ALambdaExpListAux node)
+    public void caseAAFunctionCall(AAFunctionCall node)
     {
-        inALambdaExpListAux(node);
-        if(node.getExp() != null)
+        inAAFunctionCall(node);
         {
-            node.getExp().apply(this);
+            List<PAExpList> copy = new ArrayList<PAExpList>(node.getAExpList());
+            Collections.reverse(copy);
+            for(PAExpList e : copy)
+            {
+                e.apply(this);
+            }
         }
-        if(node.getTkSignComma() != null)
+        if(node.getTkId() != null)
         {
-            node.getTkSignComma().apply(this);
+            node.getTkId().apply(this);
         }
-        outALambdaExpListAux(node);
+        outAAFunctionCall(node);
     }
 
-    public void inATkReservedBoolTrueBooleanValue(ATkReservedBoolTrueBooleanValue node)
+    public void inADecAParameter(ADecAParameter node)
     {
         defaultIn(node);
     }
 
-    public void outATkReservedBoolTrueBooleanValue(ATkReservedBoolTrueBooleanValue node)
+    public void outADecAParameter(ADecAParameter node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATkReservedBoolTrueBooleanValue(ATkReservedBoolTrueBooleanValue node)
+    public void caseADecAParameter(ADecAParameter node)
     {
-        inATkReservedBoolTrueBooleanValue(node);
+        inADecAParameter(node);
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
+        }
+        if(node.getAType() != null)
+        {
+            node.getAType().apply(this);
+        }
+        outADecAParameter(node);
+    }
+
+    public void inASignatureAParameter(ASignatureAParameter node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASignatureAParameter(ASignatureAParameter node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASignatureAParameter(ASignatureAParameter node)
+    {
+        inASignatureAParameter(node);
+        if(node.getASignature() != null)
+        {
+            node.getASignature().apply(this);
+        }
+        outASignatureAParameter(node);
+    }
+
+    public void inATypeAParameterSignature(ATypeAParameterSignature node)
+    {
+        defaultIn(node);
+    }
+
+    public void outATypeAParameterSignature(ATypeAParameterSignature node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseATypeAParameterSignature(ATypeAParameterSignature node)
+    {
+        inATypeAParameterSignature(node);
+        if(node.getAType() != null)
+        {
+            node.getAType().apply(this);
+        }
+        outATypeAParameterSignature(node);
+    }
+
+    public void inASignatureAParameterSignature(ASignatureAParameterSignature node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASignatureAParameterSignature(ASignatureAParameterSignature node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASignatureAParameterSignature(ASignatureAParameterSignature node)
+    {
+        inASignatureAParameterSignature(node);
+        if(node.getASignature() != null)
+        {
+            node.getASignature().apply(this);
+        }
+        outASignatureAParameterSignature(node);
+    }
+
+    public void inAAParameters(AAParameters node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAParameters(AAParameters node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAParameters(AAParameters node)
+    {
+        inAAParameters(node);
+        {
+            List<PAParameter> copy = new ArrayList<PAParameter>(node.getAParameter());
+            Collections.reverse(copy);
+            for(PAParameter e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outAAParameters(node);
+    }
+
+    public void inAASignature(AASignature node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAASignature(AASignature node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAASignature(AASignature node)
+    {
+        inAASignature(node);
+        if(node.getAParametersSignature() != null)
+        {
+            node.getAParametersSignature().apply(this);
+        }
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
+        }
+        if(node.getAType() != null)
+        {
+            node.getAType().apply(this);
+        }
+        outAASignature(node);
+    }
+
+    public void inAADecCons(AADecCons node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAADecCons(AADecCons node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAADecCons(AADecCons node)
+    {
+        inAADecCons(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
+        }
+        if(node.getAType() != null)
+        {
+            node.getAType().apply(this);
+        }
+        outAADecCons(node);
+    }
+
+    public void inATkReservedBoolTrueABooleanValue(ATkReservedBoolTrueABooleanValue node)
+    {
+        defaultIn(node);
+    }
+
+    public void outATkReservedBoolTrueABooleanValue(ATkReservedBoolTrueABooleanValue node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseATkReservedBoolTrueABooleanValue(ATkReservedBoolTrueABooleanValue node)
+    {
+        inATkReservedBoolTrueABooleanValue(node);
         if(node.getTkReservedBoolTrue() != null)
         {
             node.getTkReservedBoolTrue().apply(this);
         }
-        outATkReservedBoolTrueBooleanValue(node);
+        outATkReservedBoolTrueABooleanValue(node);
     }
 
-    public void inATkReservedBoolFalseBooleanValue(ATkReservedBoolFalseBooleanValue node)
+    public void inATkReservedBoolFalseABooleanValue(ATkReservedBoolFalseABooleanValue node)
     {
         defaultIn(node);
     }
 
-    public void outATkReservedBoolFalseBooleanValue(ATkReservedBoolFalseBooleanValue node)
+    public void outATkReservedBoolFalseABooleanValue(ATkReservedBoolFalseABooleanValue node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATkReservedBoolFalseBooleanValue(ATkReservedBoolFalseBooleanValue node)
+    public void caseATkReservedBoolFalseABooleanValue(ATkReservedBoolFalseABooleanValue node)
     {
-        inATkReservedBoolFalseBooleanValue(node);
+        inATkReservedBoolFalseABooleanValue(node);
         if(node.getTkReservedBoolFalse() != null)
         {
             node.getTkReservedBoolFalse().apply(this);
         }
-        outATkReservedBoolFalseBooleanValue(node);
+        outATkReservedBoolFalseABooleanValue(node);
     }
 
-    public void inAParameters(AParameters node)
+    public void inATkNumberFloatANumeralFloat(ATkNumberFloatANumeralFloat node)
     {
         defaultIn(node);
     }
 
-    public void outAParameters(AParameters node)
+    public void outATkNumberFloatANumeralFloat(ATkNumberFloatANumeralFloat node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAParameters(AParameters node)
+    public void caseATkNumberFloatANumeralFloat(ATkNumberFloatANumeralFloat node)
     {
-        inAParameters(node);
-        {
-            List<PParametersAux> copy = new ArrayList<PParametersAux>(node.getParametersAux());
-            Collections.reverse(copy);
-            for(PParametersAux e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getParameter() != null)
-        {
-            node.getParameter().apply(this);
-        }
-        outAParameters(node);
-    }
-
-    public void inAParametersAux(AParametersAux node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAParametersAux(AParametersAux node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAParametersAux(AParametersAux node)
-    {
-        inAParametersAux(node);
-        if(node.getParameter() != null)
-        {
-            node.getParameter().apply(this);
-        }
-        if(node.getTkSignComma() != null)
-        {
-            node.getTkSignComma().apply(this);
-        }
-        outAParametersAux(node);
-    }
-
-    public void inALiteralTerm(ALiteralTerm node)
-    {
-        defaultIn(node);
-    }
-
-    public void outALiteralTerm(ALiteralTerm node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseALiteralTerm(ALiteralTerm node)
-    {
-        inALiteralTerm(node);
-        if(node.getLiteral() != null)
-        {
-            node.getLiteral().apply(this);
-        }
-        outALiteralTerm(node);
-    }
-
-    public void inAFunctionCallTerm(AFunctionCallTerm node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAFunctionCallTerm(AFunctionCallTerm node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAFunctionCallTerm(AFunctionCallTerm node)
-    {
-        inAFunctionCallTerm(node);
-        if(node.getFunctionCall() != null)
-        {
-            node.getFunctionCall().apply(this);
-        }
-        outAFunctionCallTerm(node);
-    }
-
-    public void inAExpTerm(AExpTerm node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExpTerm(AExpTerm node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExpTerm(AExpTerm node)
-    {
-        inAExpTerm(node);
-        if(node.getTkSignParClose() != null)
-        {
-            node.getTkSignParClose().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        {
-            List<PDecCons> copy = new ArrayList<PDecCons>(node.getDecCons());
-            Collections.reverse(copy);
-            for(PDecCons e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getTkSignParOpen() != null)
-        {
-            node.getTkSignParOpen().apply(this);
-        }
-        outAExpTerm(node);
-    }
-
-    public void inADecParameter(ADecParameter node)
-    {
-        defaultIn(node);
-    }
-
-    public void outADecParameter(ADecParameter node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseADecParameter(ADecParameter node)
-    {
-        inADecParameter(node);
-        if(node.getTkId() != null)
-        {
-            node.getTkId().apply(this);
-        }
-        if(node.getType() != null)
-        {
-            node.getType().apply(this);
-        }
-        outADecParameter(node);
-    }
-
-    public void inASignatureParameter(ASignatureParameter node)
-    {
-        defaultIn(node);
-    }
-
-    public void outASignatureParameter(ASignatureParameter node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseASignatureParameter(ASignatureParameter node)
-    {
-        inASignatureParameter(node);
-        if(node.getSignature() != null)
-        {
-            node.getSignature().apply(this);
-        }
-        outASignatureParameter(node);
-    }
-
-    public void inATypeParameterSignature(ATypeParameterSignature node)
-    {
-        defaultIn(node);
-    }
-
-    public void outATypeParameterSignature(ATypeParameterSignature node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseATypeParameterSignature(ATypeParameterSignature node)
-    {
-        inATypeParameterSignature(node);
-        if(node.getType() != null)
-        {
-            node.getType().apply(this);
-        }
-        outATypeParameterSignature(node);
-    }
-
-    public void inASignatureParameterSignature(ASignatureParameterSignature node)
-    {
-        defaultIn(node);
-    }
-
-    public void outASignatureParameterSignature(ASignatureParameterSignature node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseASignatureParameterSignature(ASignatureParameterSignature node)
-    {
-        inASignatureParameterSignature(node);
-        if(node.getSignature() != null)
-        {
-            node.getSignature().apply(this);
-        }
-        outASignatureParameterSignature(node);
-    }
-
-    public void inAIfStmt(AIfStmt node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAIfStmt(AIfStmt node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAIfStmt(AIfStmt node)
-    {
-        inAIfStmt(node);
-        if(node.getIfStmtElseAux() != null)
-        {
-            node.getIfStmtElseAux().apply(this);
-        }
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkReservedThen() != null)
-        {
-            node.getTkReservedThen().apply(this);
-        }
-        if(node.getIfStmtExpAux() != null)
-        {
-            node.getIfStmtExpAux().apply(this);
-        }
-        outAIfStmt(node);
-    }
-
-    public void inAParametersSignature(AParametersSignature node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAParametersSignature(AParametersSignature node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAParametersSignature(AParametersSignature node)
-    {
-        inAParametersSignature(node);
-        {
-            List<PParametersSignatureAux> copy = new ArrayList<PParametersSignatureAux>(node.getParametersSignatureAux());
-            Collections.reverse(copy);
-            for(PParametersSignatureAux e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getParameterSignature() != null)
-        {
-            node.getParameterSignature().apply(this);
-        }
-        outAParametersSignature(node);
-    }
-
-    public void inAIdList(AIdList node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAIdList(AIdList node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAIdList(AIdList node)
-    {
-        inAIdList(node);
-        {
-            List<PIdListAux> copy = new ArrayList<PIdListAux>(node.getIdListAux());
-            Collections.reverse(copy);
-            for(PIdListAux e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getTkId() != null)
-        {
-            node.getTkId().apply(this);
-        }
-        outAIdList(node);
-    }
-
-    public void inAIdListAux(AIdListAux node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAIdListAux(AIdListAux node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAIdListAux(AIdListAux node)
-    {
-        inAIdListAux(node);
-        if(node.getTkId() != null)
-        {
-            node.getTkId().apply(this);
-        }
-        if(node.getTkSignComma() != null)
-        {
-            node.getTkSignComma().apply(this);
-        }
-        outAIdListAux(node);
-    }
-
-    public void inAFactorOp(AFactorOp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAFactorOp(AFactorOp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAFactorOp(AFactorOp node)
-    {
-        inAFactorOp(node);
-        if(node.getFactor() != null)
-        {
-            node.getFactor().apply(this);
-        }
-        outAFactorOp(node);
-    }
-
-    public void inAPlusOp(APlusOp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAPlusOp(APlusOp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAPlusOp(APlusOp node)
-    {
-        inAPlusOp(node);
-        if(node.getFactor() != null)
-        {
-            node.getFactor().apply(this);
-        }
-        if(node.getTkSignPlus() != null)
-        {
-            node.getTkSignPlus().apply(this);
-        }
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        outAPlusOp(node);
-    }
-
-    public void inAMinusOp(AMinusOp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAMinusOp(AMinusOp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAMinusOp(AMinusOp node)
-    {
-        inAMinusOp(node);
-        if(node.getFactor() != null)
-        {
-            node.getFactor().apply(this);
-        }
-        if(node.getTkSignMinus() != null)
-        {
-            node.getTkSignMinus().apply(this);
-        }
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        outAMinusOp(node);
-    }
-
-    public void inATermFactor(ATermFactor node)
-    {
-        defaultIn(node);
-    }
-
-    public void outATermFactor(ATermFactor node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseATermFactor(ATermFactor node)
-    {
-        inATermFactor(node);
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        outATermFactor(node);
-    }
-
-    public void inAMultFactor(AMultFactor node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAMultFactor(AMultFactor node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAMultFactor(AMultFactor node)
-    {
-        inAMultFactor(node);
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkSignMult() != null)
-        {
-            node.getTkSignMult().apply(this);
-        }
-        if(node.getFactor() != null)
-        {
-            node.getFactor().apply(this);
-        }
-        outAMultFactor(node);
-    }
-
-    public void inANegFactor(ANegFactor node)
-    {
-        defaultIn(node);
-    }
-
-    public void outANegFactor(ANegFactor node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseANegFactor(ANegFactor node)
-    {
-        inANegFactor(node);
-        if(node.getNegation() != null)
-        {
-            node.getNegation().apply(this);
-        }
-        outANegFactor(node);
-    }
-
-    public void inADivFactor(ADivFactor node)
-    {
-        defaultIn(node);
-    }
-
-    public void outADivFactor(ADivFactor node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseADivFactor(ADivFactor node)
-    {
-        inADivFactor(node);
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkSignDiv() != null)
-        {
-            node.getTkSignDiv().apply(this);
-        }
-        if(node.getFactor() != null)
-        {
-            node.getFactor().apply(this);
-        }
-        outADivFactor(node);
-    }
-
-    public void inAModFactor(AModFactor node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAModFactor(AModFactor node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAModFactor(AModFactor node)
-    {
-        inAModFactor(node);
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkSignMod() != null)
-        {
-            node.getTkSignMod().apply(this);
-        }
-        if(node.getFactor() != null)
-        {
-            node.getFactor().apply(this);
-        }
-        outAModFactor(node);
-    }
-
-    public void inANegation(ANegation node)
-    {
-        defaultIn(node);
-    }
-
-    public void outANegation(ANegation node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseANegation(ANegation node)
-    {
-        inANegation(node);
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkSignMinus() != null)
-        {
-            node.getTkSignMinus().apply(this);
-        }
-        outANegation(node);
-    }
-
-    public void inABooleanValueLiteral(ABooleanValueLiteral node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABooleanValueLiteral(ABooleanValueLiteral node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABooleanValueLiteral(ABooleanValueLiteral node)
-    {
-        inABooleanValueLiteral(node);
-        if(node.getBooleanValue() != null)
-        {
-            node.getBooleanValue().apply(this);
-        }
-        outABooleanValueLiteral(node);
-    }
-
-    public void inANumeralFloatLiteral(ANumeralFloatLiteral node)
-    {
-        defaultIn(node);
-    }
-
-    public void outANumeralFloatLiteral(ANumeralFloatLiteral node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseANumeralFloatLiteral(ANumeralFloatLiteral node)
-    {
-        inANumeralFloatLiteral(node);
-        if(node.getNumeralFloat() != null)
-        {
-            node.getNumeralFloat().apply(this);
-        }
-        outANumeralFloatLiteral(node);
-    }
-
-    public void inANumeralIntLiteral(ANumeralIntLiteral node)
-    {
-        defaultIn(node);
-    }
-
-    public void outANumeralIntLiteral(ANumeralIntLiteral node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseANumeralIntLiteral(ANumeralIntLiteral node)
-    {
-        inANumeralIntLiteral(node);
-        if(node.getNumeralInt() != null)
-        {
-            node.getNumeralInt().apply(this);
-        }
-        outANumeralIntLiteral(node);
-    }
-
-    public void inAGtExp(AGtExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAGtExp(AGtExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAGtExp(AGtExp node)
-    {
-        inAGtExp(node);
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        if(node.getTkSignBoolGt() != null)
-        {
-            node.getTkSignBoolGt().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        outAGtExp(node);
-    }
-
-    public void inALtExp(ALtExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outALtExp(ALtExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseALtExp(ALtExp node)
-    {
-        inALtExp(node);
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        if(node.getTkSignBoolLt() != null)
-        {
-            node.getTkSignBoolLt().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        outALtExp(node);
-    }
-
-    public void inAEqualExp(AEqualExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAEqualExp(AEqualExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAEqualExp(AEqualExp node)
-    {
-        inAEqualExp(node);
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        if(node.getTkSignBoolEqual() != null)
-        {
-            node.getTkSignBoolEqual().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        outAEqualExp(node);
-    }
-
-    public void inANegBoolExp(ANegBoolExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outANegBoolExp(ANegBoolExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseANegBoolExp(ANegBoolExp node)
-    {
-        inANegBoolExp(node);
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        if(node.getTkSignExclamation() != null)
-        {
-            node.getTkSignExclamation().apply(this);
-        }
-        outANegBoolExp(node);
-    }
-
-    public void inAAndExp(AAndExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAAndExp(AAndExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAAndExp(AAndExp node)
-    {
-        inAAndExp(node);
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        if(node.getTkReservedBoolAnd() != null)
-        {
-            node.getTkReservedBoolAnd().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        outAAndExp(node);
-    }
-
-    public void inAOrExp(AOrExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAOrExp(AOrExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAOrExp(AOrExp node)
-    {
-        inAOrExp(node);
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        if(node.getTkReservedBoolOr() != null)
-        {
-            node.getTkReservedBoolOr().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        outAOrExp(node);
-    }
-
-    public void inAIfStmtExp(AIfStmtExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAIfStmtExp(AIfStmtExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAIfStmtExp(AIfStmtExp node)
-    {
-        inAIfStmtExp(node);
-        if(node.getIfStmt() != null)
-        {
-            node.getIfStmt().apply(this);
-        }
-        outAIfStmtExp(node);
-    }
-
-    public void inALambdaExp(ALambdaExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outALambdaExp(ALambdaExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseALambdaExp(ALambdaExp node)
-    {
-        inALambdaExp(node);
-        if(node.getLambda() != null)
-        {
-            node.getLambda().apply(this);
-        }
-        outALambdaExp(node);
-    }
-
-    public void inAOpExp(AOpExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAOpExp(AOpExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAOpExp(AOpExp node)
-    {
-        inAOpExp(node);
-        if(node.getOp() != null)
-        {
-            node.getOp().apply(this);
-        }
-        outAOpExp(node);
-    }
-
-    public void inAIfStmtExpAux(AIfStmtExpAux node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAIfStmtExpAux(AIfStmtExpAux node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAIfStmtExpAux(AIfStmtExpAux node)
-    {
-        inAIfStmtExpAux(node);
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkReservedIf() != null)
-        {
-            node.getTkReservedIf().apply(this);
-        }
-        outAIfStmtExpAux(node);
-    }
-
-    public void inAIfStmtElseAux(AIfStmtElseAux node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAIfStmtElseAux(AIfStmtElseAux node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAIfStmtElseAux(AIfStmtElseAux node)
-    {
-        inAIfStmtElseAux(node);
-        if(node.getTerm() != null)
-        {
-            node.getTerm().apply(this);
-        }
-        if(node.getTkReservedElse() != null)
-        {
-            node.getTkReservedElse().apply(this);
-        }
-        outAIfStmtElseAux(node);
-    }
-
-    public void inATkNumberFloatNumeralFloat(ATkNumberFloatNumeralFloat node)
-    {
-        defaultIn(node);
-    }
-
-    public void outATkNumberFloatNumeralFloat(ATkNumberFloatNumeralFloat node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseATkNumberFloatNumeralFloat(ATkNumberFloatNumeralFloat node)
-    {
-        inATkNumberFloatNumeralFloat(node);
+        inATkNumberFloatANumeralFloat(node);
         if(node.getTkNumberFloat() != null)
         {
             node.getTkNumberFloat().apply(this);
         }
-        outATkNumberFloatNumeralFloat(node);
+        outATkNumberFloatANumeralFloat(node);
     }
 
-    public void inATkNumberFloatCientificNotationNumeralFloat(ATkNumberFloatCientificNotationNumeralFloat node)
+    public void inATkNumberFloatCientificNotationANumeralFloat(ATkNumberFloatCientificNotationANumeralFloat node)
     {
         defaultIn(node);
     }
 
-    public void outATkNumberFloatCientificNotationNumeralFloat(ATkNumberFloatCientificNotationNumeralFloat node)
+    public void outATkNumberFloatCientificNotationANumeralFloat(ATkNumberFloatCientificNotationANumeralFloat node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATkNumberFloatCientificNotationNumeralFloat(ATkNumberFloatCientificNotationNumeralFloat node)
+    public void caseATkNumberFloatCientificNotationANumeralFloat(ATkNumberFloatCientificNotationANumeralFloat node)
     {
-        inATkNumberFloatCientificNotationNumeralFloat(node);
+        inATkNumberFloatCientificNotationANumeralFloat(node);
         if(node.getTkNumberFloatCientificNotation() != null)
         {
             node.getTkNumberFloatCientificNotation().apply(this);
         }
-        outATkNumberFloatCientificNotationNumeralFloat(node);
+        outATkNumberFloatCientificNotationANumeralFloat(node);
     }
 
-    public void inATkNumberIntegerDecNumeralInt(ATkNumberIntegerDecNumeralInt node)
+    public void inAABooleanValueALiteral(AABooleanValueALiteral node)
     {
         defaultIn(node);
     }
 
-    public void outATkNumberIntegerDecNumeralInt(ATkNumberIntegerDecNumeralInt node)
+    public void outAABooleanValueALiteral(AABooleanValueALiteral node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATkNumberIntegerDecNumeralInt(ATkNumberIntegerDecNumeralInt node)
+    public void caseAABooleanValueALiteral(AABooleanValueALiteral node)
     {
-        inATkNumberIntegerDecNumeralInt(node);
+        inAABooleanValueALiteral(node);
+        if(node.getABooleanValue() != null)
+        {
+            node.getABooleanValue().apply(this);
+        }
+        outAABooleanValueALiteral(node);
+    }
+
+    public void inAANumeralFloatALiteral(AANumeralFloatALiteral node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAANumeralFloatALiteral(AANumeralFloatALiteral node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAANumeralFloatALiteral(AANumeralFloatALiteral node)
+    {
+        inAANumeralFloatALiteral(node);
+        if(node.getANumeralFloat() != null)
+        {
+            node.getANumeralFloat().apply(this);
+        }
+        outAANumeralFloatALiteral(node);
+    }
+
+    public void inAANumeralIntALiteral(AANumeralIntALiteral node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAANumeralIntALiteral(AANumeralIntALiteral node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAANumeralIntALiteral(AANumeralIntALiteral node)
+    {
+        inAANumeralIntALiteral(node);
+        if(node.getANumeralInt() != null)
+        {
+            node.getANumeralInt().apply(this);
+        }
+        outAANumeralIntALiteral(node);
+    }
+
+    public void inATkNumberIntegerDecANumeralInt(ATkNumberIntegerDecANumeralInt node)
+    {
+        defaultIn(node);
+    }
+
+    public void outATkNumberIntegerDecANumeralInt(ATkNumberIntegerDecANumeralInt node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseATkNumberIntegerDecANumeralInt(ATkNumberIntegerDecANumeralInt node)
+    {
+        inATkNumberIntegerDecANumeralInt(node);
         if(node.getTkNumberIntegerDec() != null)
         {
             node.getTkNumberIntegerDec().apply(this);
         }
-        outATkNumberIntegerDecNumeralInt(node);
+        outATkNumberIntegerDecANumeralInt(node);
     }
 
-    public void inATkNumberIntegerHexNumeralInt(ATkNumberIntegerHexNumeralInt node)
+    public void inATkNumberIntegerHexANumeralInt(ATkNumberIntegerHexANumeralInt node)
     {
         defaultIn(node);
     }
 
-    public void outATkNumberIntegerHexNumeralInt(ATkNumberIntegerHexNumeralInt node)
+    public void outATkNumberIntegerHexANumeralInt(ATkNumberIntegerHexANumeralInt node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATkNumberIntegerHexNumeralInt(ATkNumberIntegerHexNumeralInt node)
+    public void caseATkNumberIntegerHexANumeralInt(ATkNumberIntegerHexANumeralInt node)
     {
-        inATkNumberIntegerHexNumeralInt(node);
+        inATkNumberIntegerHexANumeralInt(node);
         if(node.getTkNumberIntegerHex() != null)
         {
             node.getTkNumberIntegerHex().apply(this);
         }
-        outATkNumberIntegerHexNumeralInt(node);
+        outATkNumberIntegerHexANumeralInt(node);
     }
 
-    public void inAIdFunctionCall(AIdFunctionCall node)
+    public void inAAIfStmtAExp(AAIfStmtAExp node)
     {
         defaultIn(node);
     }
 
-    public void outAIdFunctionCall(AIdFunctionCall node)
+    public void outAAIfStmtAExp(AAIfStmtAExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAIdFunctionCall(AIdFunctionCall node)
+    public void caseAAIfStmtAExp(AAIfStmtAExp node)
     {
-        inAIdFunctionCall(node);
-        if(node.getTkSignParClose() != null)
+        inAAIfStmtAExp(node);
+        if(node.getRight() != null)
         {
-            node.getTkSignParClose().apply(this);
+            node.getRight().apply(this);
         }
-        if(node.getExpList() != null)
+        if(node.getMiddle() != null)
         {
-            node.getExpList().apply(this);
+            node.getMiddle().apply(this);
         }
-        if(node.getTkSignParOpen() != null)
+        if(node.getLeft() != null)
         {
-            node.getTkSignParOpen().apply(this);
+            node.getLeft().apply(this);
+        }
+        outAAIfStmtAExp(node);
+    }
+
+    public void inAAOrAExp(AAOrAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAOrAExp(AAOrAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAOrAExp(AAOrAExp node)
+    {
+        inAAOrAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAOrAExp(node);
+    }
+
+    public void inAAAndAExp(AAAndAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAAndAExp(AAAndAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAAndAExp(AAAndAExp node)
+    {
+        inAAAndAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAAndAExp(node);
+    }
+
+    public void inAAEqualAExp(AAEqualAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAEqualAExp(AAEqualAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAEqualAExp(AAEqualAExp node)
+    {
+        inAAEqualAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAEqualAExp(node);
+    }
+
+    public void inAALtAExp(AALtAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAALtAExp(AALtAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAALtAExp(AALtAExp node)
+    {
+        inAALtAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAALtAExp(node);
+    }
+
+    public void inAAGtAExp(AAGtAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAGtAExp(AAGtAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAGtAExp(AAGtAExp node)
+    {
+        inAAGtAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAGtAExp(node);
+    }
+
+    public void inAANegationAExp(AANegationAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAANegationAExp(AANegationAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAANegationAExp(AANegationAExp node)
+    {
+        inAANegationAExp(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAANegationAExp(node);
+    }
+
+    public void inAAParenthesisAExp(AAParenthesisAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAParenthesisAExp(AAParenthesisAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAParenthesisAExp(AAParenthesisAExp node)
+    {
+        inAAParenthesisAExp(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAAParenthesisAExp(node);
+    }
+
+    public void inAAModAExp(AAModAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAModAExp(AAModAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAModAExp(AAModAExp node)
+    {
+        inAAModAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAModAExp(node);
+    }
+
+    public void inAAMultAExp(AAMultAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAMultAExp(AAMultAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAMultAExp(AAMultAExp node)
+    {
+        inAAMultAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAMultAExp(node);
+    }
+
+    public void inAADivAExp(AADivAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAADivAExp(AADivAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAADivAExp(AADivAExp node)
+    {
+        inAADivAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAADivAExp(node);
+    }
+
+    public void inAATypeAExp(AATypeAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAATypeAExp(AATypeAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAATypeAExp(AATypeAExp node)
+    {
+        inAATypeAExp(node);
+        if(node.getAType() != null)
+        {
+            node.getAType().apply(this);
+        }
+        outAATypeAExp(node);
+    }
+
+    public void inAALiteralAExp(AALiteralAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAALiteralAExp(AALiteralAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAALiteralAExp(AALiteralAExp node)
+    {
+        inAALiteralAExp(node);
+        if(node.getALiteral() != null)
+        {
+            node.getALiteral().apply(this);
+        }
+        outAALiteralAExp(node);
+    }
+
+    public void inAAFunctionCallAExp(AAFunctionCallAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAFunctionCallAExp(AAFunctionCallAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAFunctionCallAExp(AAFunctionCallAExp node)
+    {
+        inAAFunctionCallAExp(node);
+        if(node.getAFunctionCall() != null)
+        {
+            node.getAFunctionCall().apply(this);
+        }
+        outAAFunctionCallAExp(node);
+    }
+
+    public void inABooleanValueAExp(ABooleanValueAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABooleanValueAExp(ABooleanValueAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABooleanValueAExp(ABooleanValueAExp node)
+    {
+        inABooleanValueAExp(node);
+        if(node.getABooleanValue() != null)
+        {
+            node.getABooleanValue().apply(this);
+        }
+        outABooleanValueAExp(node);
+    }
+
+    public void inANumeralFloatAExp(ANumeralFloatAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANumeralFloatAExp(ANumeralFloatAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANumeralFloatAExp(ANumeralFloatAExp node)
+    {
+        inANumeralFloatAExp(node);
+        if(node.getANumeralFloat() != null)
+        {
+            node.getANumeralFloat().apply(this);
+        }
+        outANumeralFloatAExp(node);
+    }
+
+    public void inANumeralIntAExp(ANumeralIntAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANumeralIntAExp(ANumeralIntAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANumeralIntAExp(ANumeralIntAExp node)
+    {
+        inANumeralIntAExp(node);
+        if(node.getANumeralInt() != null)
+        {
+            node.getANumeralInt().apply(this);
+        }
+        outANumeralIntAExp(node);
+    }
+
+    public void inAAExpBlocAExp(AAExpBlocAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAExpBlocAExp(AAExpBlocAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAExpBlocAExp(AAExpBlocAExp node)
+    {
+        inAAExpBlocAExp(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        {
+            List<PADecCons> copy = new ArrayList<PADecCons>(node.getADecCons());
+            Collections.reverse(copy);
+            for(PADecCons e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outAAExpBlocAExp(node);
+    }
+
+    public void inAAPlusAExp(AAPlusAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAPlusAExp(AAPlusAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAPlusAExp(AAPlusAExp node)
+    {
+        inAAPlusAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAPlusAExp(node);
+    }
+
+    public void inAAMinusAExp(AAMinusAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAMinusAExp(AAMinusAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAMinusAExp(AAMinusAExp node)
+    {
+        inAAMinusAExp(node);
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        outAAMinusAExp(node);
+    }
+
+    public void inAALambdaAExp(AALambdaAExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAALambdaAExp(AALambdaAExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAALambdaAExp(AALambdaAExp node)
+    {
+        inAALambdaAExp(node);
+        if(node.getALambda() != null)
+        {
+            node.getALambda().apply(this);
+        }
+        outAALambdaAExp(node);
+    }
+
+    public void inAAIdList(AAIdList node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAIdList(AAIdList node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAIdList(AAIdList node)
+    {
+        inAAIdList(node);
+        {
+            List<PAIdListAux> copy = new ArrayList<PAIdListAux>(node.getAIdListAux());
+            Collections.reverse(copy);
+            for(PAIdListAux e : copy)
+            {
+                e.apply(this);
+            }
         }
         if(node.getTkId() != null)
         {
             node.getTkId().apply(this);
         }
-        outAIdFunctionCall(node);
+        outAAIdList(node);
     }
 
-    public void inAExpListExpList(AExpListExpList node)
+    public void inAAIdListAux(AAIdListAux node)
     {
         defaultIn(node);
     }
 
-    public void outAExpListExpList(AExpListExpList node)
+    public void outAAIdListAux(AAIdListAux node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAExpListExpList(AExpListExpList node)
+    public void caseAAIdListAux(AAIdListAux node)
     {
-        inAExpListExpList(node);
+        inAAIdListAux(node);
+        if(node.getTkId() != null)
         {
-            List<PExpListAux> copy = new ArrayList<PExpListAux>(node.getExpListAux());
+            node.getTkId().apply(this);
+        }
+        outAAIdListAux(node);
+    }
+
+    public void inAAId(AAId node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAId(AAId node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAId(AAId node)
+    {
+        inAAId(node);
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
+        }
+        outAAId(node);
+    }
+
+    public void inAAListExp(AAListExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAListExp(AAListExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAListExp(AAListExp node)
+    {
+        inAAListExp(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAAListExp(node);
+    }
+
+    public void inAABlocExp(AABlocExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAABlocExp(AABlocExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAABlocExp(AABlocExp node)
+    {
+        inAABlocExp(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        {
+            List<PADecCons> copy = new ArrayList<PADecCons>(node.getADecCons());
             Collections.reverse(copy);
-            for(PExpListAux e : copy)
+            for(PADecCons e : copy)
             {
                 e.apply(this);
             }
         }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
-        }
-        outAExpListExpList(node);
+        outAABlocExp(node);
     }
 
-    public void inAExpListAuxExpListAux(AExpListAuxExpListAux node)
+    public void inAALambda(AALambda node)
     {
         defaultIn(node);
     }
 
-    public void outAExpListAuxExpListAux(AExpListAuxExpListAux node)
+    public void outAALambda(AALambda node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAExpListAuxExpListAux(AExpListAuxExpListAux node)
+    public void caseAALambda(AALambda node)
     {
-        inAExpListAuxExpListAux(node);
-        if(node.getExp() != null)
+        inAALambda(node);
+        if(node.getALambdaExpList() != null)
         {
-            node.getExp().apply(this);
+            node.getALambdaExpList().apply(this);
         }
-        if(node.getTkSignComma() != null)
+        if(node.getAExp() != null)
         {
-            node.getTkSignComma().apply(this);
+            node.getAExp().apply(this);
         }
-        outAExpListAuxExpListAux(node);
+        if(node.getAIdList() != null)
+        {
+            node.getAIdList().apply(this);
+        }
+        outAALambda(node);
+    }
+
+    public void inAALambdaExpList(AALambdaExpList node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAALambdaExpList(AALambdaExpList node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAALambdaExpList(AALambdaExpList node)
+    {
+        inAALambdaExpList(node);
+        {
+            List<PALambdaExpListAux> copy = new ArrayList<PALambdaExpListAux>(node.getALambdaExpListAux());
+            Collections.reverse(copy);
+            for(PALambdaExpListAux e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAALambdaExpList(node);
+    }
+
+    public void inAALambdaExpListAux(AALambdaExpListAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAALambdaExpListAux(AALambdaExpListAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAALambdaExpListAux(AALambdaExpListAux node)
+    {
+        inAALambdaExpListAux(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAALambdaExpListAux(node);
+    }
+
+    public void inAAExpList(AAExpList node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAExpList(AAExpList node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAExpList(AAExpList node)
+    {
+        inAAExpList(node);
+        {
+            List<PAExpListAux> copy = new ArrayList<PAExpListAux>(node.getAExpListAux());
+            Collections.reverse(copy);
+            for(PAExpListAux e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAAExpList(node);
+    }
+
+    public void inAAExpListAux(AAExpListAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAExpListAux(AAExpListAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAExpListAux(AAExpListAux node)
+    {
+        inAAExpListAux(node);
+        if(node.getAExp() != null)
+        {
+            node.getAExp().apply(this);
+        }
+        outAAExpListAux(node);
+    }
+
+    public void inAAParametersSignatureAux(AAParametersSignatureAux node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAParametersSignatureAux(AAParametersSignatureAux node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAParametersSignatureAux(AAParametersSignatureAux node)
+    {
+        inAAParametersSignatureAux(node);
+        if(node.getAParameterSignature() != null)
+        {
+            node.getAParameterSignature().apply(this);
+        }
+        outAAParametersSignatureAux(node);
+    }
+
+    public void inAAParametersSignature(AAParametersSignature node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAParametersSignature(AAParametersSignature node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAParametersSignature(AAParametersSignature node)
+    {
+        inAAParametersSignature(node);
+        {
+            List<PAParametersSignatureAux> copy = new ArrayList<PAParametersSignatureAux>(node.getAParametersSignatureAux());
+            Collections.reverse(copy);
+            for(PAParametersSignatureAux e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getAParameterSignature() != null)
+        {
+            node.getAParameterSignature().apply(this);
+        }
+        outAAParametersSignature(node);
     }
 }

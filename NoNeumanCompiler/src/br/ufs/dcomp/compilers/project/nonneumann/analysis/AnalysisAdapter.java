@@ -75,349 +75,331 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAProgram(AProgram node)
+    public void caseAAProgram(AAProgram node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFunctionDec(AFunctionDec node)
+    public void caseAAFunctionDec(AAFunctionDec node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParametersFunctionAux(AParametersFunctionAux node)
+    public void caseATkReservedTypeIntAType(ATkReservedTypeIntAType node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAExpFunctionAux(AExpFunctionAux node)
+    public void caseATkReservedTypeBoolAType(ATkReservedTypeBoolAType node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseASignature(ASignature node)
+    public void caseATkReservedTypeRealAType(ATkReservedTypeRealAType node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALambda(ALambda node)
+    public void caseAAFunctionCall(AAFunctionCall node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADecConsDecCons(ADecConsDecCons node)
+    public void caseADecAParameter(ADecAParameter node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParametersSignatureAux(AParametersSignatureAux node)
+    public void caseASignatureAParameter(ASignatureAParameter node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALambdaExpList(ALambdaExpList node)
+    public void caseATypeAParameterSignature(ATypeAParameterSignature node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkReservedTypeIntType(ATkReservedTypeIntType node)
+    public void caseASignatureAParameterSignature(ASignatureAParameterSignature node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkReservedTypeBoolType(ATkReservedTypeBoolType node)
+    public void caseAAParameters(AAParameters node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkReservedTypeRealType(ATkReservedTypeRealType node)
+    public void caseAASignature(AASignature node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALambdaExpListAux(ALambdaExpListAux node)
+    public void caseAADecCons(AADecCons node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkReservedBoolTrueBooleanValue(ATkReservedBoolTrueBooleanValue node)
+    public void caseATkReservedBoolTrueABooleanValue(ATkReservedBoolTrueABooleanValue node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkReservedBoolFalseBooleanValue(ATkReservedBoolFalseBooleanValue node)
+    public void caseATkReservedBoolFalseABooleanValue(ATkReservedBoolFalseABooleanValue node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParameters(AParameters node)
+    public void caseATkNumberFloatANumeralFloat(ATkNumberFloatANumeralFloat node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParametersAux(AParametersAux node)
+    public void caseATkNumberFloatCientificNotationANumeralFloat(ATkNumberFloatCientificNotationANumeralFloat node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALiteralTerm(ALiteralTerm node)
+    public void caseAABooleanValueALiteral(AABooleanValueALiteral node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFunctionCallTerm(AFunctionCallTerm node)
+    public void caseAANumeralFloatALiteral(AANumeralFloatALiteral node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAExpTerm(AExpTerm node)
+    public void caseAANumeralIntALiteral(AANumeralIntALiteral node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADecParameter(ADecParameter node)
+    public void caseATkNumberIntegerDecANumeralInt(ATkNumberIntegerDecANumeralInt node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseASignatureParameter(ASignatureParameter node)
+    public void caseATkNumberIntegerHexANumeralInt(ATkNumberIntegerHexANumeralInt node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATypeParameterSignature(ATypeParameterSignature node)
+    public void caseAAIfStmtAExp(AAIfStmtAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseASignatureParameterSignature(ASignatureParameterSignature node)
+    public void caseAAOrAExp(AAOrAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIfStmt(AIfStmt node)
+    public void caseAAAndAExp(AAAndAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParametersSignature(AParametersSignature node)
+    public void caseAAEqualAExp(AAEqualAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIdList(AIdList node)
+    public void caseAALtAExp(AALtAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIdListAux(AIdListAux node)
+    public void caseAAGtAExp(AAGtAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFactorOp(AFactorOp node)
+    public void caseAANegationAExp(AANegationAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAPlusOp(APlusOp node)
+    public void caseAAParenthesisAExp(AAParenthesisAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMinusOp(AMinusOp node)
+    public void caseAAModAExp(AAModAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATermFactor(ATermFactor node)
+    public void caseAAMultAExp(AAMultAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMultFactor(AMultFactor node)
+    public void caseAADivAExp(AADivAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseANegFactor(ANegFactor node)
+    public void caseAATypeAExp(AATypeAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADivFactor(ADivFactor node)
+    public void caseAALiteralAExp(AALiteralAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAModFactor(AModFactor node)
+    public void caseAAFunctionCallAExp(AAFunctionCallAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseANegation(ANegation node)
+    public void caseABooleanValueAExp(ABooleanValueAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABooleanValueLiteral(ABooleanValueLiteral node)
+    public void caseANumeralFloatAExp(ANumeralFloatAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseANumeralFloatLiteral(ANumeralFloatLiteral node)
+    public void caseANumeralIntAExp(ANumeralIntAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseANumeralIntLiteral(ANumeralIntLiteral node)
+    public void caseAAExpBlocAExp(AAExpBlocAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAGtExp(AGtExp node)
+    public void caseAAPlusAExp(AAPlusAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALtExp(ALtExp node)
+    public void caseAAMinusAExp(AAMinusAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAEqualExp(AEqualExp node)
+    public void caseAALambdaAExp(AALambdaAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseANegBoolExp(ANegBoolExp node)
+    public void caseAAIdList(AAIdList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAndExp(AAndExp node)
+    public void caseAAIdListAux(AAIdListAux node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAOrExp(AOrExp node)
+    public void caseAAId(AAId node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIfStmtExp(AIfStmtExp node)
+    public void caseAAListExp(AAListExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALambdaExp(ALambdaExp node)
+    public void caseAABlocExp(AABlocExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAOpExp(AOpExp node)
+    public void caseAALambda(AALambda node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIfStmtExpAux(AIfStmtExpAux node)
+    public void caseAALambdaExpList(AALambdaExpList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIfStmtElseAux(AIfStmtElseAux node)
+    public void caseAALambdaExpListAux(AALambdaExpListAux node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkNumberFloatNumeralFloat(ATkNumberFloatNumeralFloat node)
+    public void caseAAExpList(AAExpList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkNumberFloatCientificNotationNumeralFloat(ATkNumberFloatCientificNotationNumeralFloat node)
+    public void caseAAExpListAux(AAExpListAux node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkNumberIntegerDecNumeralInt(ATkNumberIntegerDecNumeralInt node)
+    public void caseAAParametersSignatureAux(AAParametersSignatureAux node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATkNumberIntegerHexNumeralInt(ATkNumberIntegerHexNumeralInt node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAIdFunctionCall(AIdFunctionCall node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAExpListExpList(AExpListExpList node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAExpListAuxExpListAux(AExpListAuxExpListAux node)
+    public void caseAAParametersSignature(AAParametersSignature node)
     {
         defaultCase(node);
     }
