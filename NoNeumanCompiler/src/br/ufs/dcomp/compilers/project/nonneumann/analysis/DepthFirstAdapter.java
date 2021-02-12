@@ -60,23 +60,27 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAAProgram(node);
     }
 
-    public void inAAFunctionDec(AAFunctionDec node)
+    public void inADecAFunctionDec(ADecAFunctionDec node)
     {
         defaultIn(node);
     }
 
-    public void outAAFunctionDec(AAFunctionDec node)
+    public void outADecAFunctionDec(ADecAFunctionDec node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAFunctionDec(AAFunctionDec node)
+    public void caseADecAFunctionDec(ADecAFunctionDec node)
     {
-        inAAFunctionDec(node);
+        inADecAFunctionDec(node);
         if(node.getAType() != null)
         {
             node.getAType().apply(this);
+        }
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
         }
         if(node.getAParametersFunctionAux() != null)
         {
@@ -86,7 +90,40 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getAExpFunctionAux().apply(this);
         }
-        outAAFunctionDec(node);
+        outADecAFunctionDec(node);
+    }
+
+    public void inAEntryAFunctionDec(AEntryAFunctionDec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEntryAFunctionDec(AEntryAFunctionDec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEntryAFunctionDec(AEntryAFunctionDec node)
+    {
+        inAEntryAFunctionDec(node);
+        if(node.getAType() != null)
+        {
+            node.getAType().apply(this);
+        }
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
+        }
+        if(node.getAParametersFunctionAux() != null)
+        {
+            node.getAParametersFunctionAux().apply(this);
+        }
+        if(node.getAExpFunctionAux() != null)
+        {
+            node.getAExpFunctionAux().apply(this);
+        }
+        outAEntryAFunctionDec(node);
     }
 
     public void inATkReservedTypeIntAType(ATkReservedTypeIntAType node)
@@ -1128,34 +1165,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getAExp().apply(this);
         }
         outAAListExp(node);
-    }
-
-    public void inAABlocExp(AABlocExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAABlocExp(AABlocExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAABlocExp(AABlocExp node)
-    {
-        inAABlocExp(node);
-        {
-            List<PADecCons> copy = new ArrayList<PADecCons>(node.getADecCons());
-            for(PADecCons e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getAExp() != null)
-        {
-            node.getAExp().apply(this);
-        }
-        outAABlocExp(node);
     }
 
     public void inAALambda(AALambda node)

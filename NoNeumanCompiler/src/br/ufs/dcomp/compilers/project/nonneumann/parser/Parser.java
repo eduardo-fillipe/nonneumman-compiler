@@ -195,13 +195,13 @@ public class Parser
                 push(goTo(0), list);
             }
             break;
-            case 1: /* reduce AAfunctiondec1FunctionDec */
+            case 1: /* reduce ADecFunctionDec */
             {
                 ArrayList<Object> list = new1();
                 push(goTo(1), list);
             }
             break;
-            case 2: /* reduce AAfunctiondec2FunctionDec */
+            case 2: /* reduce AEntryFunctionDec */
             {
                 ArrayList<Object> list = new2();
                 push(goTo(1), list);
@@ -739,7 +739,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new1() /* reduce AAfunctiondec1FunctionDec */
+    ArrayList<Object> new1() /* reduce ADecFunctionDec */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -755,13 +755,15 @@ public class Parser
         {
             // Block
         PAType patypeNode2;
-        PAParametersFunctionAux paparametersfunctionauxNode3;
-        PAExpFunctionAux paexpfunctionauxNode4;
+        TTkId ttkidNode3;
+        PAParametersFunctionAux paparametersfunctionauxNode4;
+        PAExpFunctionAux paexpfunctionauxNode5;
         patypeNode2 = (PAType)nodeArrayList3.get(0);
-        paparametersfunctionauxNode3 = (PAParametersFunctionAux)nodeArrayList5.get(0);
-        paexpfunctionauxNode4 = (PAExpFunctionAux)nodeArrayList7.get(0);
+        ttkidNode3 = (TTkId)nodeArrayList4.get(0);
+        paparametersfunctionauxNode4 = (PAParametersFunctionAux)nodeArrayList5.get(0);
+        paexpfunctionauxNode5 = (PAExpFunctionAux)nodeArrayList7.get(0);
 
-        pafunctiondecNode1 = new AAFunctionDec(patypeNode2, paparametersfunctionauxNode3, paexpfunctionauxNode4);
+        pafunctiondecNode1 = new ADecAFunctionDec(patypeNode2, ttkidNode3, paparametersfunctionauxNode4, paexpfunctionauxNode5);
         }
 	nodeList.add(pafunctiondecNode1);
         return nodeList;
@@ -770,7 +772,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new2() /* reduce AAfunctiondec2FunctionDec */
+    ArrayList<Object> new2() /* reduce AEntryFunctionDec */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -787,13 +789,15 @@ public class Parser
         {
             // Block
         PAType patypeNode2;
-        PAParametersFunctionAux paparametersfunctionauxNode3;
-        PAExpFunctionAux paexpfunctionauxNode4;
+        TTkId ttkidNode3;
+        PAParametersFunctionAux paparametersfunctionauxNode4;
+        PAExpFunctionAux paexpfunctionauxNode5;
         patypeNode2 = (PAType)nodeArrayList4.get(0);
-        paparametersfunctionauxNode3 = (PAParametersFunctionAux)nodeArrayList6.get(0);
-        paexpfunctionauxNode4 = (PAExpFunctionAux)nodeArrayList8.get(0);
+        ttkidNode3 = (TTkId)nodeArrayList5.get(0);
+        paparametersfunctionauxNode4 = (PAParametersFunctionAux)nodeArrayList6.get(0);
+        paexpfunctionauxNode5 = (PAExpFunctionAux)nodeArrayList8.get(0);
 
-        pafunctiondecNode1 = new AAFunctionDec(patypeNode2, paparametersfunctionauxNode3, paexpfunctionauxNode4);
+        pafunctiondecNode1 = new AEntryAFunctionDec(patypeNode2, ttkidNode3, paparametersfunctionauxNode4, paexpfunctionauxNode5);
         }
 	nodeList.add(pafunctiondecNode1);
         return nodeList;

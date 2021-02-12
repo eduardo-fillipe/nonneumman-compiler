@@ -81,7 +81,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAFunctionDec(AAFunctionDec node)
+    public void caseADecAFunctionDec(ADecAFunctionDec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEntryAFunctionDec(AEntryAFunctionDec node)
     {
         defaultCase(node);
     }
@@ -352,12 +358,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAAListExp(AAListExp node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAABlocExp(AABlocExp node)
     {
         defaultCase(node);
     }

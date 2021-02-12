@@ -69,8 +69,9 @@ Productions
 
 	program{-> a_program} = function_dec+{-> New a_program([function_dec.a_function_dec])};
 	
-	function_dec{-> a_function_dec} = tk_reserved_entry? tk_sign_par_open tk_reserved_function type tk_id parameters_function_aux tk_sign_colon exp_function_aux tk_sign_par_close
-	{-> New a_function_dec(type.a_type, parameters_function_aux.a_parameters_function_aux, exp_function_aux.a_exp_function_aux)};
+	function_dec{-> a_function_dec} = 
+		{dec} tk_sign_par_open tk_reserved_function type tk_id parameters_function_aux tk_sign_colon exp_function_aux tk_sign_par_close {-> New a_function_dec.dec(type.a_type, tk_id, parameters_function_aux.a_parameters_function_aux, exp_function_aux.a_exp_function_aux)}
+		| {entry}  tk_reserved_entry tk_sign_par_open tk_reserved_function type tk_id parameters_function_aux tk_sign_colon exp_function_aux tk_sign_par_close {-> New a_function_dec.entry(type.a_type, tk_id, parameters_function_aux.a_parameters_function_aux, exp_function_aux.a_exp_function_aux)};
 	
 	parameters_function_aux{-> a_parameters_function_aux} = tk_sign_par_open parameters* tk_sign_par_close {-> New a_parameters_function_aux([parameters.a_parameters])};
 	
@@ -170,16 +171,17 @@ Abstract Syntax Tree
 
 
 
-//IN�CIO
+//Inicio
 a_program = a_function_dec+;
-a_function_dec = a_type a_parameters_function_aux a_exp_function_aux; 
+a_function_dec = {dec} a_type tk_id a_parameters_function_aux a_exp_function_aux
+				 |{entry} a_type tk_id a_parameters_function_aux a_exp_function_aux; 
 
 //TIPOS			
 a_type = {tk_reserved_type_int} tk_reserved_type_int
 	| {tk_reserved_type_bool} tk_reserved_type_bool
 	| {tk_reserved_type_real} tk_reserved_type_real;	
 
-//FUN��ES
+//Funcoes
 
 a_function_call = tk_id a_exp_list*;
 
@@ -211,7 +213,7 @@ a_literal = {a_boolean_value} a_boolean_value
 a_numeral_int = {tk_number_integer_dec}tk_number_integer_dec
 	|{tk_number_integer_hex}tk_number_integer_hex;			
 			
-//EXPRESS�O
+//EXPRESSÃO
 		
 a_exp = {a_if_stmt} [left]:a_exp [middle]:a_exp [right]:a_exp
 	| {a_or} [left]:a_exp [right]:a_exp
@@ -239,22 +241,13 @@ a_id_list = tk_id a_id_list_aux*;
 a_id_list_aux = tk_id;
 a_id = tk_id;
 a_list_exp = a_exp;
-a_bloc_exp = a_dec_cons* a_exp;
-
 a_lambda =  a_id_list? a_exp a_lambda_exp_list?;
 a_lambda_exp_list = a_exp a_lambda_exp_list_aux*;
 a_lambda_exp_list_aux = a_exp;
-
 a_exp_list =  a_exp a_exp_list_aux*;
 a_exp_list_aux = a_exp;
-
-
-
-
- 
 a_parameters_signature_aux = a_parameter_signature;			
 a_parameters_signature = a_parameter_signature a_parameters_signature_aux*;
-
 a_parameters_function_aux = a_parameters*;
 a_exp_function_aux =  a_exp;
 a_parameters_aux = a_parameter;

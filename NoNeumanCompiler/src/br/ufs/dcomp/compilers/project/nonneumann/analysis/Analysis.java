@@ -13,7 +13,8 @@ public interface Analysis extends Switch
 
     void caseStart(Start node);
     void caseAAProgram(AAProgram node);
-    void caseAAFunctionDec(AAFunctionDec node);
+    void caseADecAFunctionDec(ADecAFunctionDec node);
+    void caseAEntryAFunctionDec(AEntryAFunctionDec node);
     void caseATkReservedTypeIntAType(ATkReservedTypeIntAType node);
     void caseATkReservedTypeBoolAType(ATkReservedTypeBoolAType node);
     void caseATkReservedTypeRealAType(ATkReservedTypeRealAType node);
@@ -59,7 +60,6 @@ public interface Analysis extends Switch
     void caseAAIdListAux(AAIdListAux node);
     void caseAAId(AAId node);
     void caseAAListExp(AAListExp node);
-    void caseAABlocExp(AABlocExp node);
     void caseAALambda(AALambda node);
     void caseAALambdaExpList(AALambdaExpList node);
     void caseAALambdaExpListAux(AALambdaExpListAux node);

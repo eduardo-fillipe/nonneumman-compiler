@@ -5,24 +5,28 @@ package br.ufs.dcomp.compilers.project.nonneumann.node;
 import br.ufs.dcomp.compilers.project.nonneumann.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAFunctionDec extends PAFunctionDec
+public final class AEntryAFunctionDec extends PAFunctionDec
 {
     private PAType _aType_;
+    private TTkId _tkId_;
     private PAParametersFunctionAux _aParametersFunctionAux_;
     private PAExpFunctionAux _aExpFunctionAux_;
 
-    public AAFunctionDec()
+    public AEntryAFunctionDec()
     {
         // Constructor
     }
 
-    public AAFunctionDec(
+    public AEntryAFunctionDec(
         @SuppressWarnings("hiding") PAType _aType_,
+        @SuppressWarnings("hiding") TTkId _tkId_,
         @SuppressWarnings("hiding") PAParametersFunctionAux _aParametersFunctionAux_,
         @SuppressWarnings("hiding") PAExpFunctionAux _aExpFunctionAux_)
     {
         // Constructor
         setAType(_aType_);
+
+        setTkId(_tkId_);
 
         setAParametersFunctionAux(_aParametersFunctionAux_);
 
@@ -33,8 +37,9 @@ public final class AAFunctionDec extends PAFunctionDec
     @Override
     public Object clone()
     {
-        return new AAFunctionDec(
+        return new AEntryAFunctionDec(
             cloneNode(this._aType_),
+            cloneNode(this._tkId_),
             cloneNode(this._aParametersFunctionAux_),
             cloneNode(this._aExpFunctionAux_));
     }
@@ -42,7 +47,7 @@ public final class AAFunctionDec extends PAFunctionDec
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAFunctionDec(this);
+        ((Analysis) sw).caseAEntryAFunctionDec(this);
     }
 
     public PAType getAType()
@@ -68,6 +73,31 @@ public final class AAFunctionDec extends PAFunctionDec
         }
 
         this._aType_ = node;
+    }
+
+    public TTkId getTkId()
+    {
+        return this._tkId_;
+    }
+
+    public void setTkId(TTkId node)
+    {
+        if(this._tkId_ != null)
+        {
+            this._tkId_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._tkId_ = node;
     }
 
     public PAParametersFunctionAux getAParametersFunctionAux()
@@ -125,6 +155,7 @@ public final class AAFunctionDec extends PAFunctionDec
     {
         return ""
             + toString(this._aType_)
+            + toString(this._tkId_)
             + toString(this._aParametersFunctionAux_)
             + toString(this._aExpFunctionAux_);
     }
@@ -136,6 +167,12 @@ public final class AAFunctionDec extends PAFunctionDec
         if(this._aType_ == child)
         {
             this._aType_ = null;
+            return;
+        }
+
+        if(this._tkId_ == child)
+        {
+            this._tkId_ = null;
             return;
         }
 
@@ -161,6 +198,12 @@ public final class AAFunctionDec extends PAFunctionDec
         if(this._aType_ == oldChild)
         {
             setAType((PAType) newChild);
+            return;
+        }
+
+        if(this._tkId_ == oldChild)
+        {
+            setTkId((TTkId) newChild);
             return;
         }
 

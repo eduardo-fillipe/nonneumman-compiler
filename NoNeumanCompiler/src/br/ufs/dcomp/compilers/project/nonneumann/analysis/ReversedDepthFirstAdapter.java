@@ -61,20 +61,20 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAAProgram(node);
     }
 
-    public void inAAFunctionDec(AAFunctionDec node)
+    public void inADecAFunctionDec(ADecAFunctionDec node)
     {
         defaultIn(node);
     }
 
-    public void outAAFunctionDec(AAFunctionDec node)
+    public void outADecAFunctionDec(ADecAFunctionDec node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAFunctionDec(AAFunctionDec node)
+    public void caseADecAFunctionDec(ADecAFunctionDec node)
     {
-        inAAFunctionDec(node);
+        inADecAFunctionDec(node);
         if(node.getAExpFunctionAux() != null)
         {
             node.getAExpFunctionAux().apply(this);
@@ -83,11 +83,48 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getAParametersFunctionAux().apply(this);
         }
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
+        }
         if(node.getAType() != null)
         {
             node.getAType().apply(this);
         }
-        outAAFunctionDec(node);
+        outADecAFunctionDec(node);
+    }
+
+    public void inAEntryAFunctionDec(AEntryAFunctionDec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEntryAFunctionDec(AEntryAFunctionDec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEntryAFunctionDec(AEntryAFunctionDec node)
+    {
+        inAEntryAFunctionDec(node);
+        if(node.getAExpFunctionAux() != null)
+        {
+            node.getAExpFunctionAux().apply(this);
+        }
+        if(node.getAParametersFunctionAux() != null)
+        {
+            node.getAParametersFunctionAux().apply(this);
+        }
+        if(node.getTkId() != null)
+        {
+            node.getTkId().apply(this);
+        }
+        if(node.getAType() != null)
+        {
+            node.getAType().apply(this);
+        }
+        outAEntryAFunctionDec(node);
     }
 
     public void inATkReservedTypeIntAType(ATkReservedTypeIntAType node)
@@ -1133,35 +1170,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getAExp().apply(this);
         }
         outAAListExp(node);
-    }
-
-    public void inAABlocExp(AABlocExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAABlocExp(AABlocExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAABlocExp(AABlocExp node)
-    {
-        inAABlocExp(node);
-        if(node.getAExp() != null)
-        {
-            node.getAExp().apply(this);
-        }
-        {
-            List<PADecCons> copy = new ArrayList<PADecCons>(node.getADecCons());
-            Collections.reverse(copy);
-            for(PADecCons e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        outAABlocExp(node);
     }
 
     public void inAALambda(AALambda node)
