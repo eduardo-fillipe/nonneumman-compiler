@@ -20,7 +20,7 @@ public class Main {
 			// Imprime árvore na saída padrão
 			// tree.apply(new ASTPrinter());
 			// Imprime árvore em interface gráfica
-			//tree.apply(new ASTDisplay());
+			tree.apply(new ASTDisplay());
 			tree.apply(new SemanticAnalyzer());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
