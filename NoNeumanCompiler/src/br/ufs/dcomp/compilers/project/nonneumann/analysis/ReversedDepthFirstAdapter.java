@@ -1417,4 +1417,25 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         }
         outAAParametersAux(node);
     }
+
+    public void inAAParametersList(AAParametersList node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAParametersList(AAParametersList node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAParametersList(AAParametersList node)
+    {
+        inAAParametersList(node);
+        if(node.getAParameter() != null)
+        {
+            node.getAParameter().apply(this);
+        }
+        outAAParametersList(node);
+    }
 }

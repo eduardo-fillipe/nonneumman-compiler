@@ -70,6 +70,7 @@ public interface Analysis extends Switch
     void caseAAParametersFunctionAux(AAParametersFunctionAux node);
     void caseAAExpFunctionAux(AAExpFunctionAux node);
     void caseAAParametersAux(AAParametersAux node);
+    void caseAAParametersList(AAParametersList node);
 
     void caseTTkCommentLine(TTkCommentLine node);
     void caseTTkCommentMultiLine(TTkCommentMultiLine node);

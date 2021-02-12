@@ -423,6 +423,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAAParametersList(AAParametersList node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTTkCommentLine(TTkCommentLine node)
     {
         defaultCase(node);
